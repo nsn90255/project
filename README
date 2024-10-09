@@ -4,7 +4,9 @@ Remember this shit bruv:
 
 javac Project_main.java
 
-jar cfm Project_main.jar MANIFEST.MF *.class
+sudo jar cfm Project_main.jar MANIFEST.MF *.class
+
+sudo chmod +x /usr/local/bin/project.jar
 
 ---------------------------------------------------
 If first time : 
