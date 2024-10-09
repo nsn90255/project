@@ -37,7 +37,7 @@ public class Proyecto {
 	                break;
 	            // We add a domain to the list
 	            case 3:
-       		         addBannedDomain();
+       		         addBannedDomain(sc);
 	                break;
 	            // We remove a domain from the list
 	            case 4:
@@ -59,17 +59,21 @@ public class Proyecto {
     public static void unblock(){
         System.out.println("The blocklist is down.");
     }
-    public static void addBannedDomain(){
+    public static void addBannedDomain(Scanner sc){
+	sc.nextLine();
 	try{
 		// Create file object
 	        File blocklist = new File("/home/normal-user/project/blocklist.txt");
 		// Create writer
        		FileWriter writer = new FileWriter(blocklist, true);
 		// Write some stuff into blocklist
-		writer.write("hello world\n");
+		System.out.print("Enter a domain to block : ");
+		String toBlock = sc.nextLine();
+		writer.write(toBlock + "\n");
 		// make sure it gets written
 		writer.flush();	
 		System.out.println("Domain has been added to the blocklist.");
+		writer.close();
 	} catch (IOException e){
 		System.out.println("Error : " + e.getMessage());
 	}
