@@ -27,10 +27,9 @@ public class Project_main {
     
     public static void main(String[] args) {
         // We create our file object for the blocklist
-//        File blocklist = new File("blocklist.txt");
 	// Check if the blocklist file exists
-	File check = new File("/home/normal-user/project/blocklist.txt");
-	if (!check.exists()){
+	File blocklist = new File("/home/normal-user/project/blocklist.txt");
+	if (!blocklist.exists()){
 		System.out.println("Blocklist does not exist");
 		return;
 	}
@@ -50,7 +49,7 @@ public class Project_main {
 	                break;
 	            // We add a domain to the list
 	            case 3:
-       		         addBannedDomain(sc);
+       		         addBannedDomain(blocklist, sc);
 	                break;
 	            // We remove a domain from the list
 	            case 4:
@@ -72,12 +71,12 @@ public class Project_main {
     public static void unblock(){
         System.out.println("The blocklist is down.");
     }
-    public static void addBannedDomain(Scanner sc){
+    public static void addBannedDomain(File blocklist, Scanner sc){
 	// clear scanner because it is dirty
 	sc.nextLine();
 	try{
 		// Create file object
-	        File blocklist = new File("/home/normal-user/project/blocklist.txt");
+//	        File blocklist = new File("/home/normal-user/project/blocklist.txt");
 		// Create writer
        		FileWriter writer = new FileWriter(blocklist, true);
 		// Write some stuff into blocklist
