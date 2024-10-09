@@ -6,10 +6,6 @@ javac Project_main.java
 
 jar cfm Project_main.java MANIFEST.MF *.class
 
-sudo cp Project_main.jar /usr/local/bin/project.jar
-
-sudo chmod +x /usr/local/bin/project.jar
-
 ---------------------------------------------------
 If first time : 
 ---------------------------------------------------
