@@ -27,8 +27,9 @@ public class Project_main {
     
     public static void main(String[] args) {
         // We create our file object for the blocklist
-	// Check if the blocklist file exists
+	// create file object for the blocklist 
 	File blocklist = new File("/home/normal-user/project/blocklist.txt");
+	// check if blocklist exists
 	if (!blocklist.exists()){
 		System.out.println("Blocklist does not exist");
 		return;
@@ -75,8 +76,6 @@ public class Project_main {
 	// clear scanner because it is dirty
 	sc.nextLine();
 	try{
-		// Create file object
-//	        File blocklist = new File("/home/normal-user/project/blocklist.txt");
 		// Create writer
        		FileWriter writer = new FileWriter(blocklist, true);
 		// Write some stuff into blocklist
