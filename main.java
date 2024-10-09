@@ -60,6 +60,7 @@ public class Proyecto {
         System.out.println("The blocklist is down.");
     }
     public static void addBannedDomain(Scanner sc){
+	// clear scanner because it is dirty
 	sc.nextLine();
 	try{
 		// Create file object
@@ -68,13 +69,19 @@ public class Proyecto {
        		FileWriter writer = new FileWriter(blocklist, true);
 		// Write some stuff into blocklist
 		System.out.print("Enter a domain to block : ");
+		// store scanner buffer in toBlock string
 		String toBlock = sc.nextLine();
+		// use the writer to write to the blocklist file
 		writer.write(toBlock + "\n");
-		// make sure it gets written
-		writer.flush();	
+		// make sure it gets written 
+		// idk why but it doesn't write otherwise
+		writer.flush();
+		// inform the user
 		System.out.println("Domain has been added to the blocklist.");
+		// close the scanner
 		writer.close();
 	} catch (IOException e){
+		// catch any and all exeptions, print them
 		System.out.println("Error : " + e.getMessage());
 	}
     }
