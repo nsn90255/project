@@ -20,7 +20,7 @@ public class Project_main {
 		return;
 	}
         	// Print options
-	        System.out.print("1. Block\n2. Unblock\n3. Add a banned domain\n4. Remove a banned domain\nChose: ");
+	        System.out.print("hello 1. Block\n2. Unblock\n3. Add a banned domain\n4. Remove a banned domain\nChose: ");
        		 // Start the scanner
 	        Scanner sc = new Scanner(System.in);
        		 // Switch with the options
