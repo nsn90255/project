@@ -1,1 +1,26 @@
-work in progress
+---------------------------------------------------
+Remember this shit bruv:
+---------------------------------------------------
+
+javac Project_main.java
+
+jar cfm Project_main.java MANIFEST.MF *.class
+
+sudo cp Project_main.jar /usr/local/bin/project.jar
+
+sudo chmod +x /usr/local/bin/project.jar
+
+---------------------------------------------------
+If first time : 
+---------------------------------------------------
+
+Run this :
+
+sudo ln -P project.jar /usr/local/bin/project.jar
+
+sudo chmod +x /usr/local/bin/project.jar
+
+And write this to /bin/project :
+
+#!/bin/bash
+java -jar /usr/local/bin/project.jar "$@"
