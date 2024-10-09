@@ -1,5 +1,3 @@
-package proyecto;
-
 // Scanner for scanning user input
 import java.util.Scanner;
 // File to be able to work with files
@@ -9,7 +7,7 @@ import java.io.FileWriter;
 // to handle exceptions
 import java.io.IOException;
 
-public class Proyecto {
+public class Project_main {
 
     
     public static void main(String[] args) {
@@ -86,6 +84,7 @@ public class Proyecto {
 	}
     }
     public static void removeBannedDomain(){
+	
         System.out.println("Domain has been removed from the blocklist.");
     }
 }
