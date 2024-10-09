@@ -26,7 +26,6 @@ public class Project_main {
 
     
     public static void main(String[] args) {
-        // We create our file object for the blocklist
 	// create file object for the blocklist 
 	File blocklist = new File("/home/normal-user/project/blocklist.txt");
 	// check if blocklist exists
