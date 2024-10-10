@@ -30,7 +30,7 @@ public class Project_main {
     
     public static void main(String[] args) {
 	// create file object for the blocklist 
-	File blocklist = new File("/home/hugo/project/blocklist.txt");
+	File blocklist = new File("blocklist.txt");
 	// check if blocklist exists
 	if (!blocklist.exists()){
 		System.out.println("Blocklist does not exist");
