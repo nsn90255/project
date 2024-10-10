@@ -19,6 +19,9 @@ import java.util.Scanner;
 import java.io.File;
 // to write to files
 import java.io.FileWriter;
+// to read files
+import java.io.FileReader;
+import java.io.BufferedReader;
 // to handle exceptions
 import java.io.IOException;
 
@@ -27,7 +30,7 @@ public class Project_main {
     
     public static void main(String[] args) {
 	// create file object for the blocklist 
-	File blocklist = new File("/home/normal-user/project/blocklist.txt");
+	File blocklist = new File("/home/hugo/project/blocklist.txt");
 	// check if blocklist exists
 	if (!blocklist.exists()){
 		System.out.println("Blocklist does not exist");
@@ -81,6 +84,14 @@ public class Project_main {
 		System.out.print("Enter a domain to block : ");
 		// store scanner buffer in toBlock string
 		String toBlock = sc.nextLine();
+		// check if already in the list
+		
+		if (checkInBlocklist(blocklist, toBlock)) {
+			System.out.println("Already in blocklist");
+			return;
+		}
+
+
 		// use the writer to write to the blocklist file
 		writer.write(toBlock + "\n");
 		// make sure it gets written 
@@ -98,5 +109,25 @@ public class Project_main {
     public static void removeBannedDomain(){
 	
         System.out.println("Domain has been removed from the blocklist.");
+    }
+    public static boolean checkInBlocklist(File blocklist, String toBlock){
+
+	// check
+	try {
+		BufferedReader br = new BufferedReader(new FileReader(blocklist));
+		String currentLine;
+		while ((currentLine = br.readLine()) != null) {
+			if (currentLine.equals(toBlock)) {
+				br.close();
+				return true;
+			}
+		}
+		br.close();
+		return false;
+	} catch (IOException e) {
+		// catch exeptions
+		System.out.println("Error : " + e.getMessage());
+	}
+	return false;
     }
 }
