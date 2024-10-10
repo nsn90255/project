@@ -19,6 +19,7 @@ import java.util.Scanner;
 import java.io.File;
 // to write to files
 import java.io.FileWriter;
+import java.io.BufferedWriter;
 // to read files
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -43,20 +44,20 @@ public class Project_main {
        		 // Switch with the options
 	        switch(sc.nextInt()) {
 	        // We add the domains to /etc/hosts
-	        case 1:
-		    block();
-               	    break;
+	            case 1:
+			block();
+               		break;
 	            // We remove the domains from /etc/hosts
 	            case 2:
 	                unblock();
 	                break;
 	            // We add a domain to the list
 	            case 3:
-       		         addBannedDomain(blocklist, sc);
+       		        addBannedDomain(blocklist, sc);
 	                break;
 	            // We remove a domain from the list
 	            case 4:
-	                removeBannedDomain();
+	                removeBannedDomain(blocklist, sc);
 	                break;
 	            default:
 	                System.out.println("Wrong option");
@@ -79,35 +80,70 @@ public class Project_main {
 	sc.nextLine();
 	try{
 		// Create writer
-       		FileWriter writer = new FileWriter(blocklist, true);
+       		BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
 		// Write some stuff into blocklist
 		System.out.print("Enter a domain to block : ");
 		// store scanner buffer in toBlock string
 		String toBlock = sc.nextLine();
 		// check if already in the list
-		
 		if (checkInBlocklist(blocklist, toBlock)) {
 			System.out.println("Already in blocklist");
 			return;
 		}
-
-
 		// use the writer to write to the blocklist file
-		writer.write(toBlock + "\n");
+		wr.write(toBlock + "\n");
 		// make sure it gets written 
 		// idk why but it doesn't write otherwise
-		writer.flush();
+		wr.flush();
 		// inform the user
 		System.out.println("Domain has been added to the blocklist.");
 		// close the scanner
-		writer.close();
+		wr.close();
 	} catch (IOException e){
 		// catch any and all exeptions, print them
 		System.out.println("Error : " + e.getMessage());
 	}
     }
-    public static void removeBannedDomain(){
-	
+    public static void removeBannedDomain(File blocklist, Scanner sc){
+	// clear scanner because it is dirty
+	sc.nextLine();
+	try{
+		// create an object for the temp file
+		File tempFile = new File("blocklist.txt.temp");
+		// create reader
+		BufferedReader rd = new BufferedReader(new FileReader(blocklist));
+		// Create writer
+       		BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile, true));
+		// ask a domain to remove from blocklist
+		System.out.print("Enter a domain to unblock : ");
+		// store scanner into toUnblock string
+		String toUnblock = sc.nextLine();
+		// check if not in the list
+		if (!checkInBlocklist(blocklist, toUnblock)) {
+			System.out.println("Not in the blocklist");
+			return;
+		}
+		// if it is in the list proceed
+		String currentLine;
+		while((currentLine = rd.readLine()) !=null) {
+			String trimmedLine = currentLine.trim();
+			if (trimmedLine.equals(toUnblock)) continue;
+			wr.write(currentLine);
+		}
+		wr.close();
+		rd.close();
+		boolean successful = tempFile.renameTo(blocklist);
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+	} catch (IOException e) {
+		// catch exceptions, print them
+		System.out.println("Error : " + e.getMessage());
+	}
         System.out.println("Domain has been removed from the blocklist.");
     }
     public static boolean checkInBlocklist(File blocklist, String toBlock){
