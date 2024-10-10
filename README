@@ -14,7 +14,7 @@ To add to /bin/ :
 
 Run this :
 
-sudo ln -P project.jar /usr/local/bin/project.jar
+sudo ln -P Project_main.jar /usr/local/bin/project.jar
 
 sudo chmod +x /usr/local/bin/project.jar
 
