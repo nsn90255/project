@@ -128,15 +128,21 @@ public class Project_main {
 		// if it is in the list proceed
 		// create string for current line
 		String currentLine;
+		// read the blocklsit line by line
 		while((currentLine = rd.readLine()) !=null) {
+			// remove whitespaces
 			String trimmedLine = currentLine.trim();
+			// if the trimed line is the same as the domain to block don't copy it over
 			if (trimmedLine.equals(toUnblock)) continue;
+			// write the current line to the temp file
 			wr.write(currentLine + "\n");
 		}
+		// close the writer and the writer
 		wr.close();
 		rd.close();
-		boolean successful = tempFile.renameTo(blocklist);
-		//
+		// rename the temp file to blocklist.txt
+		tempFile.renameTo(blocklist);
+		
 	} catch (IOException e) {
 		// catch exceptions, print them
 		System.out.println("Error : " + e.getMessage());
