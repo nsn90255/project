@@ -120,25 +120,22 @@ public class Project_main {
 		String toUnblock = sc.nextLine();
 		// check if not in the list
 		if (!checkInBlocklist(blocklist, toUnblock)) {
+			// if not, say so
 			System.out.println("Not in the blocklist");
+			// exit to main
 			return;
 		}
 		// if it is in the list proceed
+		// create string for current line
 		String currentLine;
 		while((currentLine = rd.readLine()) !=null) {
 			String trimmedLine = currentLine.trim();
 			if (trimmedLine.equals(toUnblock)) continue;
-			wr.write(currentLine);
+			wr.write(currentLine + "\n");
 		}
 		wr.close();
 		rd.close();
 		boolean successful = tempFile.renameTo(blocklist);
-		//
-		//
-		//
-		//
-		//
-		//
 		//
 	} catch (IOException e) {
 		// catch exceptions, print them
