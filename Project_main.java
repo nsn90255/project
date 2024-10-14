@@ -96,7 +96,7 @@ public class Project_main {
 		// idk why but it doesn't write otherwise
 		wr.flush();
 		// inform the user
-		System.out.println("Domain has been added to the blocklist.");
+		System.out.println(toBlock + " has been added to the blocklist.");
 		// close the scanner
 		wr.close();
 	} catch (IOException e){
@@ -142,12 +142,10 @@ public class Project_main {
 		rd.close();
 		// rename the temp file to blocklist.txt
 		tempFile.renameTo(blocklist);
-		
+		System.out.println(toUnblock + " has been removed from the blocklist.");
 	} catch (IOException e) {
 		// catch exceptions, print them
-		System.out.println("Error : " + e.getMessage());
 	}
-        System.out.println("Domain has been removed from the blocklist.");
     }
     public static boolean checkInBlocklist(File blocklist, String toBlock){
 
