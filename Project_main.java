@@ -38,9 +38,9 @@ public class Project_main {
 	}
         	// Print options
 	        System.out.print("1. Block\n2. Unblock\n3. Add a banned domain\n4. Remove a banned domain\nChose: ");
-       		 // Start the scanner
+       		// Start the scanner
 	        Scanner sc = new Scanner(System.in);
-       		 // Switch with the options
+       		// Switch with the options
 	        switch(sc.nextInt()) {
 	        // We add the domains to /etc/hosts
 	            case 1:
@@ -69,6 +69,7 @@ public class Project_main {
         System.out.println("The blocklist is up.");
     }
     public static void unblock(){
+	// stuff
         System.out.println("The blocklist is down.");
     }
     public static void addBannedDomain(File blocklist, Scanner sc){
@@ -138,28 +139,37 @@ public class Project_main {
 		rd.close();
 		// rename the temp file to blocklist.txt
 		tempFile.renameTo(blocklist);
+		// inform user
 		System.out.println(toUnblock + " has been removed from the blocklist.");
 	} catch (IOException e) {
-		// catch exceptions, print them
+	   	// catch exceptions, print them
+		System.out.println("Error : " + e.getMessage());
 	}
     }
     public static boolean checkInBlocklist(File blocklist, String toBlock){
 	// check
 	try {
+		// create writer
 		BufferedReader br = new BufferedReader(new FileReader(blocklist));
+		// string for the current line
 		String currentLine;
+		// loop to read each current line while there are lines
 		while ((currentLine = br.readLine()) != null) {
+			// if the current line is equal to the domain entered by the user
 			if (currentLine.equals(toBlock)) {
+				// close reader
 				br.close();
 				return true;
 			}
 		}
+		// close writer
 		br.close();
 		return false;
 	} catch (IOException e) {
-		// catch exeptions
+		// catch exeptions, print them
 		System.out.println("Error : " + e.getMessage());
 	}
+	// added just in case (compiler complains otherwise)
 	return false;
     }
 }
