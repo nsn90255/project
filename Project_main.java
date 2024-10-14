@@ -27,7 +27,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Project_main {
-
     
     public static void main(String[] args) {
 	// create file object for the blocklist 
@@ -63,9 +62,6 @@ public class Project_main {
 	                System.out.println("Wrong option");
 	        }
 	sc.close();
-	
-        
-        
     }
     public static void block(){
         // stuff here
@@ -148,7 +144,6 @@ public class Project_main {
 	}
     }
     public static boolean checkInBlocklist(File blocklist, String toBlock){
-
 	// check
 	try {
 		BufferedReader br = new BufferedReader(new FileReader(blocklist));
