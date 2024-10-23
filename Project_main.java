@@ -64,9 +64,25 @@ public class Project_main {
         System.out.println("The blocklist is down.");
     }
     public static void addBannedDomain(File blocklist, Scanner sc, String[] args){
+	// if no domain is specified print help and return to main
+	if (args.length < 2) {
+		help();
+		return;
+	}
 	try{
 		// Create writer
-       		BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
+       		BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
+		// Create reader
+		BufferedReader rd = new BufferedReader(new FileReader(blocklist));
+
+
+
+
+
+
+
+
+
 		// use the second cli argument as the domain to block	
 		String toBlock = args[1];
 		// check if already in the list
@@ -142,6 +158,7 @@ public class Project_main {
 	        } else {
 	            // If no domain was removed, delete the temp file
 	            tempFile.delete();
+		    // inform that no domain was removed
 		    System.out.println("No domain was removed from the blocklist");
 	        }
 	} catch (IOException e) {
