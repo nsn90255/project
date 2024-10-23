@@ -89,48 +89,59 @@ public class Project_main {
 	}
     }
     public static void removeBannedDomain(File blocklist, Scanner sc, String[] args){
+
+		// if no domain is specified print help and return to main
+		if (args.length < 2) {
+			help();
+			return;
+		}
 	try{
 		// create an object for the temp file
 		File tempFile = new File("blocklist.txt.temp");
 		// create reader
 		BufferedReader rd = new BufferedReader(new FileReader(blocklist));
 		// Create writer
-       		BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile, true));
-		// use the second cli argument as the domain to block	
-		if (args.length < 2) {
-			help();
-			return;
-		}
-		String toUnblock = "toUnblock";
-		// loop through arguments
-		for ( int i = 1; i < args.length; i++) {
-			toUnblock = args[i];
-			// check if not in the list
-			if (!checkInBlocklist(blocklist, toUnblock)) {
-				// if not, say so
-				System.out.println(toUnblock + " not in the blocklist");
-			} else {
-				// if it is in the list proceed
-				// create string for current line
-				String currentLine;
-				// read the blocklsit line by line
-				while((currentLine = rd.readLine()) !=null) {
-					// remove whitespaces
-					String trimmedLine = currentLine.trim();
-					// if the trimed line is the same as the domain to block don't copy it over
-					if (trimmedLine.equals(toUnblock)) continue;
-					// write the current line to the temp file
-					wr.write(currentLine + "\n");
+       		BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile));
+		// Flag to track if we can rename the file later
+	        boolean domainRemoved = false;
+		// initialise the string for the domain to unblock, otherwise compiler cries
+		// String toUnblock = "toUnblock";
+		String currentLine;
+		while((currentLine = rd.readLine()) !=null) {
+			// remove whitespaces
+			String trimmedLine = currentLine.trim();
+			
+			boolean shouldWrite = true;
+
+			for (int i = 1;	i < args.length; i++) {
+				String toUnblock = args[i].trim();
+				if (trimmedLine.equals(toUnblock)) {
+					System.out.println(toUnblock + " has been removed from the blocklist.");
+					shouldWrite = false;
+					domainRemoved = true;
+					break;
 				}
-			// inform user
-			System.out.println(toUnblock + " has been removed from the blocklist.");
+			}
+			if (shouldWrite) {
+				wr.write(currentLine + "\n");
 			}
 		}
+
 		// close the writer and the writer
 		wr.close();
 		rd.close();
 		// rename the temp file to blocklist.txt
-		tempFile.renameTo(blocklist);
+	        if (domainRemoved) {
+		    if (tempFile.renameTo(blocklist)) {
+	               System.out.println("Blocklist updated successfully.");
+	            } else {
+	               System.out.println("Error renaming temporary file.");
+	            }
+	        } else {
+	            // If no domain was removed, delete the temp file
+	            tempFile.delete();
+		    System.out.println("No matching domains found in the blocklist.");
+	        }
 	} catch (IOException e) {
 	   	// catch exceptions, print them
 		System.out.println("Error : " + e.getMessage());
