@@ -40,7 +40,10 @@ public class Project_main {
 	// create scanner
 	Scanner sc = new Scanner(System.in);
 	// options
-		if (args[0].equals("-u") || args[0].equals("--unblock")){
+		if (args.length == 0){
+			help();
+			return;
+		} else if (args[0].equals("-u") || args[0].equals("--unblock")){
 			unblock();
 		} else if (args[0].equals("-b") || args[0].equals("--block")){
 			block();
