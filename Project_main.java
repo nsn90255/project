@@ -32,36 +32,26 @@ public class Project_main {
 	// create file object for the blocklist 
 	File blocklist = new File("/opt/blocklist.txt");
 	// check if blocklist exists
+//	System.out.println(args[0]);
 	if (!blocklist.exists()){
 		System.out.println("Blocklist does not exist");
 		return;
 	}
-        	// Print options
-	        System.out.print("1. Block\n2. Unblock\n3. Add a banned domain\n4. Remove a banned domain\nChose: ");
-       		// Start the scanner
-	        Scanner sc = new Scanner(System.in);
-       		// Switch with the options
-	        switch(sc.nextInt()) {
-	        // We add the domains to /etc/hosts
-	            case 1:
+	// create scanner
+	Scanner sc = new Scanner(System.in);
+	// options
+		if (args[0].equals("-u") || args[0].equals("--unblock")){
+			unblock();
+		} else if (args[0].equals("-b") || args[0].equals("--block")){
 			block();
-               		break;
-	            // We remove the domains from /etc/hosts
-	            case 2:
-	                unblock();
-	                break;
-	            // We add a domain to the list
-	            case 3:
-       		        addBannedDomain(blocklist, sc);
-	                break;
-	            // We remove a domain from the list
-	            case 4:
-	                removeBannedDomain(blocklist, sc);
-	                break;
-	            default:
-	                System.out.println("Wrong option");
-	        }
-	sc.close();
+		} else if (args[0].equals("-a") || args[0].equals("--add")){
+			addBannedDomain(blocklist, sc);
+		} else if (args[0].equals("-r") || args[0].equals("--remove")){
+			removeBannedDomain(blocklist, sc);
+		} else {
+			help();
+			return;
+		}
     }
     public static void block(){
         // stuff here
@@ -73,8 +63,6 @@ public class Project_main {
         System.out.println("The blocklist is down.");
     }
     public static void addBannedDomain(File blocklist, Scanner sc){
-	// clear scanner because it is dirty
-	sc.nextLine();
 	try{
 		// Create writer
        		BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
@@ -102,8 +90,6 @@ public class Project_main {
 	}
     }
     public static void removeBannedDomain(File blocklist, Scanner sc){
-	// clear scanner because it is dirty
-	sc.nextLine();
 	try{
 		// create an object for the temp file
 		File tempFile = new File("blocklist.txt.temp");
@@ -171,5 +157,12 @@ public class Project_main {
 	}
 	// added just in case (compiler complains otherwise)
 	return false;
+    }
+    public static void help(){
+ 	// print basic info about usage 
+	System.out.println("Usage : project [option]");
+	// print info about the commands
+	System.out.println(" --help\t\t\t\t\tPrint this.\n -u, --unblock\t\t\t\tUnblock domains.\n -b, --block\t\t\t\tBlock domains.\n -a, -add\t\t\t\tAdd a domain to block.\n -r, --remove\t\t\t\tRemove a blocked domain.");
+   
     }
 }
