@@ -4,9 +4,7 @@ Remember this shit bruv:
 
 javac Project_main.java
 
-jar cfm Project_main.jar MANIFEST.MF *.class
-
-chmod +x Project_main.jar
+jar cfm Project_main.jar MANIFEST.MF Project_main.class
 
 --------------------------------------------------
 To add to /bin/ : 
@@ -14,7 +12,7 @@ To add to /bin/ :
 
 Run this :
 
-sudo ln -P Project_main.jar /usr/local/bin/project.jar
+sudo cp Project_main.jar /usr/local/bin/project.jar
 
 sudo chmod +x /usr/local/bin/project.jar
 
