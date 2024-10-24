@@ -148,7 +148,7 @@ public class Project_main {
 			}
 		}
 
-		// close the writer and the writer
+		// close the writer and the reader
 		wr.close();
 		rd.close();
 		// rename the temp file to blocklist.txt if one domain or more is written
