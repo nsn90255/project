@@ -71,32 +71,32 @@ public class Project_main {
 	}
 	try{
 		// Create writer
-       		BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
+       		BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
 		// Create reader
 		BufferedReader rd = new BufferedReader(new FileReader(blocklist));
-
-
-
-
-
-
-
-
-
-		// use the second cli argument as the domain to block	
-		String toBlock = args[1];
-		// check if already in the list
-		if (checkInBlocklist(blocklist, toBlock)) {
-			System.out.println("Already in blocklist");
-			return;
+		// loop through every argument starting from the second one
+		for (int i = 1; i < args.length; i++){
+			// assign the argument to toBlock
+			String toBlock = args[i];
+			// controls whether to write or not
+			boolean write = true;
+			// variable to store the line read by the buffered reader
+			String currentLine;
+			while ((currentLine = rd.readLine()) != null) {
+				// remove whitespaces
+				String trimmedLine = currentLine.trim();
+				if (trimmedLine.equals(args[i])) {
+					write = false;
+					break;
+				}
+			}
+			if (write == true) {
+				wr.write(toBlock + "\n");
+				System.out.println(toBlock + " has been added to the blocklist.");
+			} else {
+				System.out.println(toBlock + " is already in the blocklist the blocklist.");
+			}
 		}
-		// use the writer to write to the blocklist file
-		wr.write(toBlock + "\n");
-		// make sure it gets written 
-		// idk why but it doesn't write otherwise
-		wr.flush();
-		// inform the user
-		System.out.println(toBlock + " has been added to the blocklist.");
 		// close the scanner
 		wr.close();
 	} catch (IOException e){
