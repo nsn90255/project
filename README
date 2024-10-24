@@ -2,17 +2,17 @@
 To compile jar file
 --------------------------------------------------
 
-javac Project_main.java
+$ javac Project_main.java
 
-jar cfm Project_main.jar MANIFEST.MF Project_main.class
+$ jar cfm Project_main.jar MANIFEST.MF Project_main.class
 
 --------------------------------------------------
 To add to /bin/ 
 --------------------------------------------------
 
-sudo cp Project_main.jar /usr/local/bin/project.jar
+# cp Project_main.jar /usr/local/bin/project.jar
 
-sudo chmod +x /usr/local/bin/project.jar
+# chmod +x /usr/local/bin/project.jar
 
 And write this to /bin/project :
 
