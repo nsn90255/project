@@ -43,9 +43,9 @@ public class Project_main {
 		help();
 		return;
 	} else if (args[0].equals("-u") || args[0].equals("--unblock")){
-		unblock();
+		unblock(blocklist, args);
 	} else if (args[0].equals("-b") || args[0].equals("--block")){
-		block();
+		block(blocklist, args);
 	} else if (args[0].equals("-a") || args[0].equals("--add")){
 		addBannedDomain(blocklist, sc, args);
 	} else if (args[0].equals("-r") || args[0].equals("--remove")){
@@ -54,15 +54,30 @@ public class Project_main {
 		help();
 	}
     }
-    public static void block(){
-        // stuff here
-	//
-        System.out.println("The blocklist is up.");
-    }
-    public static void unblock(){
+    public static void unblock(File blocklist, String args[]){
 	// stuff
+	if (args.length > 1) {
+		help();
+		return;
+	}
+
+
+
+
+
+
+	
         System.out.println("The blocklist is down.");
     }
+    public static void block(File blocklist, String args[]){
+        // stuff here
+	if (args.length > 1) {
+		help();
+		return;
+	}
+        System.out.println("The blocklist is up.");
+    }
+
     public static void addBannedDomain(File blocklist, Scanner sc, String[] args){
 	// if no domain is specified print help and return to main
 	if (args.length < 2) {
@@ -166,6 +181,7 @@ public class Project_main {
 		System.out.println("Error : " + e.getMessage());
 	}
     }
+    // might delete later if unused
     public static boolean checkInBlocklist(File blocklist, String toBlock){
 	// check
 	try {
