@@ -29,8 +29,10 @@ import java.io.IOException;
 public class Project_main {
     
 	public static void main(String[] args) {
-		// create file object for the blocklist 
+		// create file objects 
 		File blocklist = new File("/opt/blocklist");
+		//File hosts = new File("/etc/hosts");
+		//File backup = new File("/etc/hosts.bkp");
 		// create scanner
 		Scanner sc = new Scanner(System.in);
 		// check if blocklist exists
@@ -69,11 +71,56 @@ public class Project_main {
 		System.out.println("The blocklist is down.");
 	}
 	public static void block(File blocklist, String args[]){
-		// stuff here
 		if (args.length > 1) {
 			help();
 			return;
+		}  
+		File doesBackupExist = new File("/etc/hosts.bkp");
+		// if hosts.bkp already exists exit 
+		if (doesBackupExist.exists()){
+			System.out.println("The blocklist is already up dummy");
+			return;
 		}
+		// backup file
+		File backup = new File("/etc/hosts.bkp");
+		try {
+			// create new backup file
+			backup.createNewFile();
+			System.out.println("backup of hosts file created");
+		} catch (IOException e) {
+			System.out.println("Error : " + e.getMessage());
+		}
+		// check if hosts exists
+		File doesHostsExist = new File("/etc/hosts");
+		if (!doesBackupExist.exists()){
+			// if not, tell user
+			System.out.println("The hosts file doesn't exist, you should fix that.");
+			return;
+		}
+		// hosts file
+		File hosts = new File("/etc/hosts");
+		// write the hosts file to a backup
+		try {
+			// Create writer
+			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
+			// Create reader
+			BufferedReader rd = new BufferedReader(new FileReader(hosts));
+			// var for the current line
+			String currentLine;
+			while((currentLine = rd.readLine()) !=null) {
+				String trimmedLine = currentLine.trim();
+				wr.write(currentLine + "\n");
+			}
+
+
+		} catch (IOException e) {
+			// catch any and all exeptions, print them
+			System.out.println("Error : " + e.getMessage());
+		}
+
+
+
+
 		System.out.println("The blocklist is up.");
 	}
 	public static void addBannedDomain(File blocklist, Scanner sc, String[] args){
@@ -110,10 +157,8 @@ public class Project_main {
 					System.out.println(toBlock + " is already in the blocklist the blocklist.");
 				}
 			}
-			// close the scanner
 			wr.close();
 		} catch (IOException e){
-			// catch any and all exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 	}
@@ -127,9 +172,8 @@ public class Project_main {
 		try{
 			// create an object for the temp file
 			File tempFile = new File("blocklist.temp");
-			// create reader
+			// create reader & writer
 			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
-			// Create writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile));
 			boolean domainRemoved = false;
 			// create the string for the current line that the br is reading
@@ -146,7 +190,6 @@ public class Project_main {
 					String toUnblock = args[i].trim();
 					// if the line without the whitespace is the same as the argument
 					if (trimmedLine.equals(toUnblock)) {
-						// print that it has been removed
 						System.out.println(toUnblock + " has been removed from the blocklist.");
 						// do not write it
 						shouldWrite = false;
@@ -171,17 +214,14 @@ public class Project_main {
 			} else {
 			    // If no domain was removed, delete the temp file
 			    tempFile.delete();
-			    // inform that no domain was removed
 			    System.out.println("No domain was removed from the blocklist");
 			}
 		} catch (IOException e) {
-			// catch exceptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 	}
 	// might delete later if unused
 	public static boolean checkInBlocklist(File blocklist, String toBlock){
-		// check
 		try {
 			// create writer
 			BufferedReader br = new BufferedReader(new FileReader(blocklist));
@@ -191,16 +231,13 @@ public class Project_main {
 			while ((currentLine = br.readLine()) != null) {
 				// if the current line is equal to the domain entered by the user
 				if (currentLine.equals(toBlock)) {
-					// close reader
 					br.close();
 					return true;
 				}
 			}
-			// close writer
 			br.close();
 			return false;
 		} catch (IOException e) {
-			// catch exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 		// added just in case (compiler complains otherwise)
@@ -222,7 +259,6 @@ public class Project_main {
 			wr.write("youtube.com\n" + "instagram.com\n" + "tiktok.com\n" + "facebook.com\n");
 			wr.close();
 		} catch (IOException e) {
-			// catch exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 		// inform user
