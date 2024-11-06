@@ -35,14 +35,14 @@ public class Project_main {
 		Scanner sc = new Scanner(System.in);
 		// check if blocklist exists
 		if (!blocklist.exists()){
+			// if not, ask to create it
 			System.out.print("Blocklist does not exist. Create?(y/n) : ");
 			if (sc.nextLine().equalsIgnoreCase("y")) { 
 				createBlocklist();
-				return;
 			} else {
-			System.out.println("Exiting.");
-			return;
+				System.out.println("A blocklist is needed. Create it.");
 			}
+			return;
 		}
 		// options to chose
 		if (args.length == 0){
