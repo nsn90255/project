@@ -44,7 +44,7 @@ public class Project_main {
 			return;
 			}
 		}
-		// options
+		// options to chose
 		if (args.length == 0){
 			help();
 			return;
