@@ -219,7 +219,7 @@ public class Project_main {
 			File blocklist = new File("/opt/blocklist");
 			// Create writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
-			wr.write("youtube.com\n" + "wikipedia.com\n");
+			wr.write("youtube.com\n" + "instagram.com\n" + "tiktok.com\n" + "facebook.com\n");
 			wr.close();
 		} catch (IOException e) {
 			// catch exeptions, print them
