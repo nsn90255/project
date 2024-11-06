@@ -36,7 +36,7 @@ public class Project_main {
 		// check if blocklist exists
 		if (!blocklist.exists()){
 			System.out.print("Blocklist does not exist. Create?(y/n) : ");
-			if (sc.nextLine().equals("Y") || sc.nextLine().equals("y")) {
+			if (sc.nextLine().equalsIgnoreCase("y")) { 
 				createBlocklist();
 				return;
 			} else {
