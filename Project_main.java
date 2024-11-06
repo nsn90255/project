@@ -29,11 +29,7 @@ import java.io.IOException;
 public class Project_main {
     
 	public static void main(String[] args) {
-		// create file objects 
 		File blocklist = new File("/opt/blocklist");
-		//File hosts = new File("/etc/hosts");
-		//File backup = new File("/etc/hosts.bkp");
-		// create scanner
 		Scanner sc = new Scanner(System.in);
 		// check if blocklist exists
 		if (!blocklist.exists()){
@@ -78,7 +74,7 @@ public class Project_main {
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		// if hosts.bkp already exists exit 
 		if (doesBackupExist.exists()){
-			System.out.println("The blocklist is already up dummy");
+			System.out.println("The blocklist is already up.");
 			return;
 		}
 		// backup file
@@ -101,9 +97,8 @@ public class Project_main {
 		File hosts = new File("/etc/hosts");
 		// write the hosts file to a backup
 		try {
-			// Create writer
+			// Create writer & reader
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
-			// Create reader
 			BufferedReader rd = new BufferedReader(new FileReader(hosts));
 			// var for the current line
 			String currentLine;
