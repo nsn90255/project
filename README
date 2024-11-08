@@ -18,3 +18,5 @@ And write this to /bin/project :
 
 #!/bin/bash
 java -jar /usr/local/bin/project.jar "$@"
+
+test
