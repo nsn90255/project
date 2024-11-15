@@ -98,26 +98,39 @@ public class Project_main {
 		// write the hosts file to a backup
 		try {
 			// Create writer & reader
-			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
+			BufferedWriter wr = new BufferedWriter(new FileWriter(backup));
 			BufferedReader rd = new BufferedReader(new FileReader(hosts));
 			// var for the current line
 			String currentLine;
 			while((currentLine = rd.readLine()) !=null) {
-				String trimmedLine = currentLine.trim();
 				wr.write(currentLine + "\n");
 			}
-
-
+		wr.close();
+		rd.close();
 		} catch (IOException e) {
 			// catch any and all exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
-
-
-
-
+		// copy /opt/blocklist to /etc/hosts
+		try {
+			//create reader & writer
+			BufferedWriter wr = new BufferedWriter(new FileWriter(hosts, true));
+			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
+			// var for the current line
+			String currentLine;
+			wr.write("127.0.0.1 ");
+			while((currentLine = rd.readLine()) !=null) {
+				wr.write(currentLine + " ");
+			}
+		wr.close();
+		rd.close();
+		} catch (IOException e) {
+			// catch any and all exeptions, print them
+			System.out.println("Error : " + e.getMessage());
+		}
 		System.out.println("The blocklist is up.");
 	}
+// MAKE CHECK IF BLOCKING OR NOT BEFORE REMOVING OR ADDING DOMAINS
 	public static void addBannedDomain(File blocklist, Scanner sc, String[] args){
 		// if no domain is specified print help and return to main
 		if (args.length < 2) {
@@ -251,7 +264,7 @@ public class Project_main {
 			File blocklist = new File("/opt/blocklist");
 			// Create writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
-			wr.write("youtube.com\n" + "instagram.com\n" + "tiktok.com\n" + "facebook.com\n");
+			wr.write("www.youtube.com\n" + "www.instagram.com\n" + "www.tiktok.com\n" + "www.facebook.com\n");
 			wr.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
