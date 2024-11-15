@@ -46,14 +46,16 @@ public class Project_main {
 		if (args.length == 0){
 			help();
 			return;
-		} else if (args[0].equals("-u") || args[0].equals("--unblock")){
+		} else if (args[0].equals("-u") || args[0].equals("--unblock")) {
 			unblock(blocklist, args);
-		} else if (args[0].equals("-b") || args[0].equals("--block")){
+		} else if (args[0].equals("-b") || args[0].equals("--block")) {
 			block(blocklist, args);
-		} else if (args[0].equals("-a") || args[0].equals("--add")){
+		} else if (args[0].equals("-a") || args[0].equals("--add")) {
 			addBannedDomain(blocklist, sc, args);
-		} else if (args[0].equals("-r") || args[0].equals("--remove")){
+		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
 			removeBannedDomain(blocklist, sc, args);
+		} else if (args[0].equals("-s") || args[0].equals("status")) {
+			checkStatus();
 		} else {
 			help();
 		}
@@ -262,11 +264,22 @@ public class Project_main {
 		// added just in case (compiler complains otherwise)
 		return false;
 	}
+	public static boolean checkStatus() {
+		// check if blocklist running or not
+		File doesBackupExist = new File("/etc/hosts.bkp");
+		if (doesBackupExist.exists()) {
+			System.out.println("Domains are being blocked.");
+			return true;
+		} else {
+			System.out.println("Domains are not being blocked.");
+			return false;
+		}
+	}
 	public static void help(){
 		// print basic info about usage 
 		System.out.println("Usage : project [command] [domain]");
 		// print info about the commands
-		System.out.println(" --help\t\t\t\t\tPrint this.\n -u, --unblock\t\t\t\tUnblock domains.\n -b, --block\t\t\t\tBlock domains.\n -a, -add\t\t\t\tAdd a domain to block.\n -r, --remove\t\t\t\tRemove a blocked domain.");
+		System.out.println(" --help\t\t\t\t\tPrint this.\n -u, --unblock\t\t\t\tUnblock domains.\n -b, --block\t\t\t\tBlock domains.\n -a, -add\t\t\t\tAdd a domain to block.\n -r, --remove\t\t\t\tRemove a blocked domain.\n -s, --status\t\t\t\tCheck if running or not.");
 
 	}
 	public static void createBlocklist() {
