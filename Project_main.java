@@ -64,6 +64,17 @@ public class Project_main {
 			help();
 			return;
 		}
+		File doesBackupExist = new File("/etc/hosts.bkp");
+		// if the bakcup file doesn't exist the blocklist is not up
+		if (!doesBackupExist.exists()){
+			System.out.println("The blocklist is not up.");
+			return;
+		}
+		File hosts = new File("/etc/hosts");
+		File backup = new File("/etc/hosts.bkp");
+
+		hosts.delete();
+		backup.renameTo(hosts);
 		System.out.println("The blocklist is down.");
 	}
 	public static void block(File blocklist, String args[]){
