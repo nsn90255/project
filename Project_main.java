@@ -55,7 +55,11 @@ public class Project_main {
 		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
 			removeBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-s") || args[0].equals("status")) {
-			checkStatus();
+			if (checkStatus() == true) {
+				System.out.println("Domains are being blocked.");
+			} else {
+				System.out.println("Domains are not being blocked.");
+			}
 		} else {
 			help();
 		}
@@ -66,10 +70,8 @@ public class Project_main {
 			help();
 			return;
 		}
-		File doesBackupExist = new File("/etc/hosts.bkp");
-		// if the bakcup file doesn't exist the blocklist is not up
-		if (!doesBackupExist.exists()){
-			System.out.println("The blocklist is not up.");
+		if (checkStatus() == false) {
+			System.out.println("Blocklist already down.");
 			return;
 		}
 		File hosts = new File("/etc/hosts");
@@ -84,10 +86,8 @@ public class Project_main {
 			help();
 			return;
 		}  
-		File doesBackupExist = new File("/etc/hosts.bkp");
-		// if hosts.bkp already exists exit 
-		if (doesBackupExist.exists()){
-			System.out.println("The blocklist is already up.");
+		if (checkStatus() == true) {
+			System.out.println("Blocklist already down.");
 			return;
 		}
 		// backup file
@@ -101,7 +101,7 @@ public class Project_main {
 		}
 		// check if hosts exists
 		File doesHostsExist = new File("/etc/hosts");
-		if (!doesBackupExist.exists()){
+		if (!doesHostsExist.exists()){
 			// if not, tell user
 			System.out.println("The hosts file doesn't exist, you should fix that.");
 			return;
@@ -268,10 +268,8 @@ public class Project_main {
 		// check if blocklist running or not
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
-			System.out.println("Domains are being blocked.");
 			return true;
 		} else {
-			System.out.println("Domains are not being blocked.");
 			return false;
 		}
 	}
