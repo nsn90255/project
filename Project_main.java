@@ -52,7 +52,6 @@ public class Project_main {
 		}
 	}
 	public static void unblock(File blocklist, String args[]){
-		// stuff
 		if (args.length > 1) {
 			help();
 			return;
@@ -77,7 +76,6 @@ public class Project_main {
 			System.out.println("Blocklist already down.");
 			return;
 		}
-		// backup file
 		File backup = new File("/etc/hosts.bkp");
 		try {
 			// create new backup file
