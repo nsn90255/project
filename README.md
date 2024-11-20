@@ -10,7 +10,7 @@ $ jar cfm Project_main.jar MANIFEST.MF Project_main.class
 
 \# chmod +x /usr/local/bin/project.jar
 
-And write this to /bin/project :
+## And write this to /bin/project :
 
 #!/bin/bash
 java -jar /usr/local/bin/project.jar "$@"
