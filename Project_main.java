@@ -33,16 +33,8 @@ public class Project_main {
 		Scanner sc = new Scanner(System.in);
 		// check if blocklist exists
 		if (!blocklist.exists()){
-			// if not, ask to create it
-			System.out.print("Blocklist does not exist. Create?(y/n) : ");
-			if (sc.nextLine().equalsIgnoreCase("y")) { 
-				createBlocklist();
-			} else {
-				System.out.println("A blocklist is needed. Create it.");
-			}
-			return;
+			createBlocklist();
 		}
-		// options to chose
 		if (args.length == 0){
 			help();
 			return;
@@ -70,7 +62,7 @@ public class Project_main {
 			help();
 			return;
 		}
-		if (checkStatus() == false) {
+		if (!checkStatus()) {
 			System.out.println("Blocklist already down.");
 			return;
 		}
@@ -86,7 +78,7 @@ public class Project_main {
 			help();
 			return;
 		}  
-		if (checkStatus() == true) {
+		if (checkStatus()) {
 			System.out.println("Blocklist already down.");
 			return;
 		}
