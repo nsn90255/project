@@ -106,7 +106,6 @@ public class Project_main {
 		wr.close();
 		rd.close();
 		} catch (IOException e) {
-			// catch any and all exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 		// copy /opt/blocklist to /etc/hosts
@@ -123,7 +122,6 @@ public class Project_main {
 		wr.close();
 		rd.close();
 		} catch (IOException e) {
-			// catch any and all exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 		System.out.println("The blocklist is up.");
@@ -169,16 +167,12 @@ public class Project_main {
 		}
 	}
 	public static void removeBannedDomain(File blocklist, Scanner sc, String[] args){
-		// if no domain is specified print help and return to main
 		if (args.length < 2) {
 			help();
 			return;
 		}
-		// reading and writing goes in the try catch
 		try{
-			// create an object for the temp file
 			File tempFile = new File("blocklist.temp");
-			// create reader & writer
 			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
 			BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile));
 			boolean domainRemoved = false;
@@ -209,8 +203,6 @@ public class Project_main {
 					wr.write(currentLine + "\n");
 				}
 			}
-
-			// close the writer and the reader
 			wr.close();
 			rd.close();
 			// rename the temp file to blocklist.txt if one domain or more is written
@@ -250,7 +242,6 @@ public class Project_main {
 		return false;
 	}
 	public static boolean checkStatus() {
-		// check if blocklist running or not
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
 			return true;
@@ -259,9 +250,7 @@ public class Project_main {
 		}
 	}
 	public static void help(){
-		// print basic info about usage 
 		System.out.println("Usage : project [command] [domain]");
-		// print info about the commands
 		System.out.println(" --help\t\t\t\t\tPrint this.\n -u, --unblock\t\t\t\tUnblock domains.\n -b, --block\t\t\t\tBlock domains.\n -a, -add\t\t\t\tAdd a domain to block.\n -r, --remove\t\t\t\tRemove a blocked domain.\n -s, --status\t\t\t\tCheck if running or not.");
 
 	}
@@ -269,14 +258,12 @@ public class Project_main {
 		try {
 			// create the blocklist
 			File blocklist = new File("/opt/blocklist");
-			// Create writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
 			wr.write("www.youtube.com\n" + "www.instagram.com\n" + "www.tiktok.com\n" + "www.facebook.com\n");
 			wr.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		// inform user
 		System.out.println("Blocklist created with default blocked domains.");
 		return;
 	}
