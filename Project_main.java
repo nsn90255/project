@@ -13,17 +13,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Scanner for scanning user input
 import java.util.Scanner;
-// File to be able to work with files
 import java.io.File;
-// to write to files
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-// to read files
 import java.io.FileReader;
 import java.io.BufferedReader;
-// to handle exceptions
 import java.io.IOException;
 
 public class Project_main {
@@ -46,8 +41,8 @@ public class Project_main {
 			addBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
 			removeBannedDomain(blocklist, sc, args);
-		} else if (args[0].equals("-s") || args[0].equals("status")) {
-			if (checkStatus() == true) {
+		} else if (args[0].equals("-s") || args[0].equals("--status")) {
+			if (checkStatus()) {
 				System.out.println("Domains are being blocked.");
 			} else {
 				System.out.println("Domains are not being blocked.");
