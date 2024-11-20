@@ -34,9 +34,19 @@ public class Project_main {
 			help();
 			return;
 		} else if (args[0].equals("-u") || args[0].equals("--unblock")) {
-			unblock(blocklist, args);
+			if (args.length > 1) {
+				help();
+				return;
+			} else {
+				unblock(blocklist, args);
+			}
 		} else if (args[0].equals("-b") || args[0].equals("--block")) {
-			block(blocklist, args);
+			if (args.length > 1) {
+				help();
+				return;
+			} else {
+				block(blocklist, args);
+			}
 		} else if (args[0].equals("-a") || args[0].equals("--add")) {
 			addBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
@@ -52,10 +62,6 @@ public class Project_main {
 		}
 	}
 	public static void unblock(File blocklist, String args[]){
-		if (args.length > 1) {
-			help();
-			return;
-		}
 		if (!checkStatus()) {
 			System.out.println("Blocklist already down.");
 			return;
@@ -68,10 +74,6 @@ public class Project_main {
 		System.out.println("The blocklist is down.");
 	}
 	public static void block(File blocklist, String args[]){
-		if (args.length > 1) {
-			help();
-			return;
-		}  
 		if (checkStatus()) {
 			System.out.println("Blocklist already down.");
 			return;
