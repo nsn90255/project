@@ -242,6 +242,7 @@ public class Project_main {
 		// added just in case (compiler complains otherwise)
 		return false;
 	}
+	// maybe make this universal, not just for hosts
 	public static boolean checkStatus() {
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
