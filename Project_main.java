@@ -13,17 +13,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Scanner for scanning user input
 import java.util.Scanner;
-// File to be able to work with files
 import java.io.File;
-// to write to files
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-// to read files
 import java.io.FileReader;
 import java.io.BufferedReader;
-// to handle exceptions
 import java.io.IOException;
 
 public class Project_main {
@@ -33,29 +28,31 @@ public class Project_main {
 		Scanner sc = new Scanner(System.in);
 		// check if blocklist exists
 		if (!blocklist.exists()){
-			// if not, ask to create it
-			System.out.print("Blocklist does not exist. Create?(y/n) : ");
-			if (sc.nextLine().equalsIgnoreCase("y")) { 
-				createBlocklist();
-			} else {
-				System.out.println("A blocklist is needed. Create it.");
-			}
-			return;
+			createBlocklist();
 		}
-		// options to chose
 		if (args.length == 0){
 			help();
 			return;
 		} else if (args[0].equals("-u") || args[0].equals("--unblock")) {
-			unblock(blocklist, args);
+			if (args.length > 1) {
+				help();
+				return;
+			} else {
+				unblock(blocklist, args);
+			}
 		} else if (args[0].equals("-b") || args[0].equals("--block")) {
-			block(blocklist, args);
+			if (args.length > 1) {
+				help();
+				return;
+			} else {
+				block(blocklist, args);
+			}
 		} else if (args[0].equals("-a") || args[0].equals("--add")) {
 			addBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
 			removeBannedDomain(blocklist, sc, args);
-		} else if (args[0].equals("-s") || args[0].equals("status")) {
-			if (checkStatus() == true) {
+		} else if (args[0].equals("-s") || args[0].equals("--status")) {
+			if (checkStatus()) {
 				System.out.println("Domains are being blocked.");
 			} else {
 				System.out.println("Domains are not being blocked.");
@@ -65,12 +62,7 @@ public class Project_main {
 		}
 	}
 	public static void unblock(File blocklist, String args[]){
-		// stuff
-		if (args.length > 1) {
-			help();
-			return;
-		}
-		if (checkStatus() == false) {
+		if (!checkStatus()) {
 			System.out.println("Blocklist already down.");
 			return;
 		}
@@ -82,15 +74,10 @@ public class Project_main {
 		System.out.println("The blocklist is down.");
 	}
 	public static void block(File blocklist, String args[]){
-		if (args.length > 1) {
-			help();
-			return;
-		}  
-		if (checkStatus() == true) {
+		if (checkStatus()) {
 			System.out.println("Blocklist already down.");
 			return;
 		}
-		// backup file
 		File backup = new File("/etc/hosts.bkp");
 		try {
 			// create new backup file
@@ -121,7 +108,6 @@ public class Project_main {
 		wr.close();
 		rd.close();
 		} catch (IOException e) {
-			// catch any and all exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 		// copy /opt/blocklist to /etc/hosts
@@ -138,7 +124,6 @@ public class Project_main {
 		wr.close();
 		rd.close();
 		} catch (IOException e) {
-			// catch any and all exeptions, print them
 			System.out.println("Error : " + e.getMessage());
 		}
 		System.out.println("The blocklist is up.");
@@ -184,16 +169,12 @@ public class Project_main {
 		}
 	}
 	public static void removeBannedDomain(File blocklist, Scanner sc, String[] args){
-		// if no domain is specified print help and return to main
 		if (args.length < 2) {
 			help();
 			return;
 		}
-		// reading and writing goes in the try catch
 		try{
-			// create an object for the temp file
 			File tempFile = new File("blocklist.temp");
-			// create reader & writer
 			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
 			BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile));
 			boolean domainRemoved = false;
@@ -224,8 +205,6 @@ public class Project_main {
 					wr.write(currentLine + "\n");
 				}
 			}
-
-			// close the writer and the reader
 			wr.close();
 			rd.close();
 			// rename the temp file to blocklist.txt if one domain or more is written
@@ -265,7 +244,6 @@ public class Project_main {
 		return false;
 	}
 	public static boolean checkStatus() {
-		// check if blocklist running or not
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
 			return true;
@@ -274,9 +252,7 @@ public class Project_main {
 		}
 	}
 	public static void help(){
-		// print basic info about usage 
 		System.out.println("Usage : project [command] [domain]");
-		// print info about the commands
 		System.out.println(" --help\t\t\t\t\tPrint this.\n -u, --unblock\t\t\t\tUnblock domains.\n -b, --block\t\t\t\tBlock domains.\n -a, -add\t\t\t\tAdd a domain to block.\n -r, --remove\t\t\t\tRemove a blocked domain.\n -s, --status\t\t\t\tCheck if running or not.");
 
 	}
@@ -284,14 +260,12 @@ public class Project_main {
 		try {
 			// create the blocklist
 			File blocklist = new File("/opt/blocklist");
-			// Create writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
 			wr.write("www.youtube.com\n" + "www.instagram.com\n" + "www.tiktok.com\n" + "www.facebook.com\n");
 			wr.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		// inform user
 		System.out.println("Blocklist created with default blocked domains.");
 		return;
 	}
