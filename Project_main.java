@@ -52,17 +52,14 @@ public class Project_main {
 		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
 			removeBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-s") || args[0].equals("--status")) {
-			if (checkStatus()) {
-				System.out.println("Domains are being blocked.");
-			} else {
-				System.out.println("Domains are not being blocked.");
-			}
+			checkStatus();
 		} else {
 			help();
 		}
 	}
 	public static void unblock(File blocklist, String args[]){
-		if (!checkStatus()) {
+		File doesBackupExist = new File("/etc/hosts.bkp");
+		if (!doesBackupExist.exists()) {
 			System.out.println("Blocklist already down.");
 			return;
 		}
@@ -73,8 +70,9 @@ public class Project_main {
 		System.out.println("The blocklist is down.");
 	}
 	public static void block(File blocklist, String args[]){
-		if (checkStatus()) {
-			System.out.println("Blocklist already down.");
+		File doesBackupExist = new File("/etc/hosts.bkp");
+		if (doesBackupExist.exists()) {
+			System.out.println("Blocklist already up.");
 			return;
 		}
 		File backup = new File("/etc/hosts.bkp");
@@ -242,12 +240,13 @@ public class Project_main {
 		// added just in case (compiler complains otherwise)
 		return false;
 	}
-	// maybe make this universal, not just for hosts
 	public static boolean checkStatus() {
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
+			System.out.println("Domains are being blocked.");
 			return true;
 		} else {
+			System.out.println("Domains are not being blocked.");
 			return false;
 		}
 	}
