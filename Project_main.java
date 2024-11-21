@@ -25,11 +25,11 @@ public class Project_main {
     
 	public static void main(String[] args) {
 		File blocklist = new File("/opt/blocklist");
-		Scanner sc = new Scanner(System.in);
 		// check if blocklist exists
 		if (!blocklist.exists()){
 			createBlocklist();
 		}
+		Scanner sc = new Scanner(System.in);
 		if (args.length == 0){
 			help();
 			return;
@@ -68,7 +68,6 @@ public class Project_main {
 		}
 		File hosts = new File("/etc/hosts");
 		File backup = new File("/etc/hosts.bkp");
-
 		hosts.delete();
 		backup.renameTo(hosts);
 		System.out.println("The blocklist is down.");
