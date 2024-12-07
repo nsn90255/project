@@ -133,9 +133,7 @@ public class Project_main {
 			return;
 		}
 		try{
-			// Create writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
-			// Create reader
 			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
 			// loop through every argument starting from the second one
 			for (int i = 1; i < args.length; i++){
@@ -252,7 +250,7 @@ public class Project_main {
 	}
 	public static void help(){
 		System.out.println("Usage : project [command] [domain]");
-		System.out.println(" --help\t\t\t\t\tPrint this.\n -u, --unblock\t\t\t\tUnblock domains.\n -b, --block\t\t\t\tBlock domains.\n -a, -add\t\t\t\tAdd a domain to block.\n -r, --remove\t\t\t\tRemove a blocked domain.\n -s, --status\t\t\t\tCheck if running or not.");
+		System.out.println(" -u\t\t\t\tUnblock domains.\n -b\t\t\t\tBlock domains.\n -a\t\t\t\tAdd a domain to block.\n -r\t\t\t\tRemove a blocked domain.\n -s\t\t\t\tCheck if running or not.");
 
 	}
 	public static void createBlocklist() {
