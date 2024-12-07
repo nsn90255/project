@@ -33,25 +33,25 @@ public class Project_main {
 		if (args.length == 0){
 			help();
 			return;
-		} else if (args[0].equals("-u") || args[0].equals("--unblock")) {
+		} else if (args[0].equals("-u")) {
 			if (args.length > 1) {
 				help();
 				return;
 			} else {
 				unblock(blocklist, args);
 			}
-		} else if (args[0].equals("-b") || args[0].equals("--block")) {
+		} else if (args[0].equals("-b")) {
 			if (args.length > 1) {
 				help();
 				return;
 			} else {
 				block(blocklist, args);
 			}
-		} else if (args[0].equals("-a") || args[0].equals("--add")) {
+		} else if (args[0].equals("-a")) {
 			addBannedDomain(blocklist, sc, args);
-		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
+		} else if (args[0].equals("-r")) {
 			removeBannedDomain(blocklist, sc, args);
-		} else if (args[0].equals("-s") || args[0].equals("--status")) {
+		} else if (args[0].equals("-s")) {
 			checkStatus();
 		} else {
 			help();
@@ -250,7 +250,7 @@ public class Project_main {
 	}
 	public static void help(){
 		System.out.println("Usage : project [command] [domain]");
-		System.out.println(" -u\t\t\t\tUnblock domains.\n -b\t\t\t\tBlock domains.\n -a\t\t\t\tAdd a domain to block.\n -r\t\t\t\tRemove a blocked domain.\n -s\t\t\t\tCheck if running or not.");
+		System.out.println("  -u\t\t\t\tUnblock domains.\n  -b\t\t\t\tBlock domains.\n  -a\t\t\t\tAdd a domain to block.\n  -r\t\t\t\tRemove a blocked domain.\n  -s\t\t\t\tCheck if running or not.");
 
 	}
 	public static void createBlocklist() {
