@@ -1,6 +1,8 @@
 #!/bin/sh
-javac Project_main.java
-jar cfm Project_main.jar MANIFEST.MF Project_main.class
+mkdir build
+javac -d build/ Project_main.java
+cd build
+jar cfm Project_main.jar ../MANIFEST.MF Project_main.class
 cp Project_main.jar /usr/local/bin/project.jar
 chmod 744 /usr/local/bin/project.jar
 echo '#!/bin/sh' > /usr/local/bin/project
