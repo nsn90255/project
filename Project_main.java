@@ -52,7 +52,7 @@ public class Project_main {
 		} else if (args[0].equals("-r")) {
 			removeBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-s")) {
-			if (checkStatus()) {
+			if (checkBlocking()) {
 				System.out.println("Is blocking right now.");
 			} else {
 				System.out.println("Is not blocking right now.");
@@ -62,7 +62,7 @@ public class Project_main {
 		}
 	}
 	public static void unblock(File blocklist, String args[]){
-		if (!checkStatus()) {
+		if (!checkBlocking()) {
 			System.out.println("Not blocking right now. Nothing to do.");
 			return;
 		}
@@ -74,7 +74,7 @@ public class Project_main {
 	}
 	public static void block(File blocklist, String args[]){
 		// if already blocking stop
-		if (checkStatus()) {
+		if (checkBlocking()) {
 			System.out.println("Already blocking.");
 			return;
 		}
@@ -139,7 +139,7 @@ public class Project_main {
 	}
 	public static void addBannedDomain(File blocklist, Scanner sc, String[] args){
 		// if blocking prevent user from editing config
-		if (checkStatus()) {
+		if (checkBlocking()) {
 			System.out.println("Blocking right now. Unblock and try again.");
 			return;
 		}
@@ -182,7 +182,7 @@ public class Project_main {
 	}
 	public static void removeBannedDomain(File blocklist, Scanner sc, String[] args){
 		// if blocking prevent user from editing config
-		if (checkStatus()) {
+		if (checkBlocking()) {
 			System.out.println("Blocking right now. Unblock and try again.");
 			return;
 		}
@@ -238,7 +238,7 @@ public class Project_main {
 			System.out.println("Error : " + e.getMessage());
 		}
 	}
-	public static boolean checkStatus() {
+	public static boolean checkBlocking() {
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
 			return true;
