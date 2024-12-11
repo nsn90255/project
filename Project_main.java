@@ -249,7 +249,11 @@ public class Project_main {
 			// create the blocklist
 			File blocklist = new File("/etc/blocklist.conf");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
-			wr.write("www.youtube.com\n" + "www.instagram.com\n" + "www.tiktok.com\n" + "www.facebook.com\n");
+			wr.write("block :\n");
+			wr.write("www.youtube.com\n");
+			wr.write("www.instagram.com\n");
+			wr.write("www.tiktok.com\n");
+			wr.write("www.facebook.com\n");
 			wr.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
