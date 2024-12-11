@@ -52,11 +52,7 @@ public class Project_main {
 		} else if (args[0].equals("-r")) {
 			removeBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-s")) {
-			if (checkBlocking()) {
-				System.out.println("Is blocking right now.");
-			} else {
-				System.out.println("Is not blocking right now.");
-			}	
+			checkStatus();
 		} else {
 			help();
 		}
@@ -284,4 +280,11 @@ public class Project_main {
 	}
 	public static void blockedDays() {
 	}	
+	public static void checkStatus() {
+		if (checkBlocking()) {
+			System.out.println("Is blocking right now.");
+		} else {
+			System.out.println("Is not blocking right now.");
+		}	
+	}
 }
