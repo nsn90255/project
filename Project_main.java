@@ -118,7 +118,7 @@ public class Project_main {
 				if (currentLine.equals("block :") || currentLine.charAt(0) == '#') {
 					continue;
 				}
-				String[] notWrite = {"block :", "days :", "monday :", "tuesday :", "wednessday :", "thursday :", "friday :", "saturday :", "sunday :"};
+				String[] notWrite = {"block :", "monday :", "tuesday :", "wednessday :", "thursday :", "friday :", "saturday :", "sunday :"};
 				for (int j = 0; j < 9; j++) {
 					if (currentLine == notWrite[j]) {
 						continue;
@@ -261,7 +261,6 @@ public class Project_main {
 			wr.write("# www.instagram.com\n");
 			wr.write("# www.tiktok.com\n");
 			wr.write("# www.facebook.com\n");
-			wr.write("# days :\n");
 			wr.write("# write your days to block here\n");
 			wr.write("# example :\n");
 			wr.write("# monday :\n");
