@@ -103,6 +103,9 @@ public class Project_main {
 			// var for the current line
 			String currentLine;
 			while((currentLine = rd.readLine()) !=null) {
+				if (currentLine.equals("block :")) {
+					continue;
+				}
 				wr.write(currentLine + "\n");
 			}
 		wr.close();
