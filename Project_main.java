@@ -227,29 +227,6 @@ public class Project_main {
 			System.out.println("Error : " + e.getMessage());
 		}
 	}
-	// might delete later if unused
-	public static boolean checkInBlocklist(File blocklist, String toBlock){
-		try {
-			// create writer
-			BufferedReader br = new BufferedReader(new FileReader(blocklist));
-			// string for the current line
-			String currentLine;
-			// loop to read each current line while there are lines
-			while ((currentLine = br.readLine()) != null) {
-				// if the current line is equal to the domain entered by the user
-				if (currentLine.equals(toBlock)) {
-					br.close();
-					return true;
-				}
-			}
-			br.close();
-			return false;
-		} catch (IOException e) {
-			System.out.println("Error : " + e.getMessage());
-		}
-		// added just in case (compiler complains otherwise)
-		return false;
-	}
 	public static boolean checkStatus() {
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
