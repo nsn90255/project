@@ -127,8 +127,12 @@ public class Project_main {
 		}
 		System.out.println("The blocklist is up.");
 	}
-// MAKE CHECK IF BLOCKING OR NOT BEFORE REMOVING OR ADDING DOMAINS
 	public static void addBannedDomain(File blocklist, Scanner sc, String[] args){
+		// if blocking prevent user from editing config
+		if (checkStatus()) {
+			System.out.println("Blocking right now. Unblock and try again.");
+			return;
+		}
 		// if no domain is specified print help and return to main
 		if (args.length < 2) {
 			help();
@@ -166,6 +170,12 @@ public class Project_main {
 		}
 	}
 	public static void removeBannedDomain(File blocklist, Scanner sc, String[] args){
+		// if blocking prevent user from editing config
+		if (checkStatus()) {
+			System.out.println("Blocking right now. Unblock and try again.");
+			return;
+		}
+		// if no arguments stop here
 		if (args.length < 2) {
 			help();
 			return;
