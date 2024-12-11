@@ -119,7 +119,7 @@ public class Project_main {
 			String currentLine;
 			wr.write("127.0.0.1 ");
 			while((currentLine = rd.readLine()) !=null) {
-				if (currentLine.equals("block :")) {
+				if (currentLine.equals("block :") || currentLine.charAt(0) == '#') {
 					continue;
 				}
 				wr.write(currentLine + " ");
@@ -252,11 +252,22 @@ public class Project_main {
 			// create the blocklist
 			File blocklist = new File("/etc/blocklist.conf");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
+			wr.write("# write your websites to block here\n");
 			wr.write("block :\n");
 			wr.write("www.youtube.com\n");
-			wr.write("www.instagram.com\n");
-			wr.write("www.tiktok.com\n");
-			wr.write("www.facebook.com\n");
+			wr.write("# www.instagram.com\n");
+			wr.write("# www.tiktok.com\n");
+			wr.write("# www.facebook.com\n");
+			wr.write("# days :\n");
+			wr.write("# write your days to block here\n");
+			wr.write("# example :\n");
+			wr.write("# monday :\n");
+			wr.write("# \t00:15 12:00\n");
+			wr.write("# block on mondays from 00:15 to 13:00\n");
+			wr.write("# tuesday :\n");
+			wr.write("# \tall\n");
+			wr.write("# block all tuesday long\n");
+			
 			wr.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
@@ -264,4 +275,6 @@ public class Project_main {
 		System.out.println("Blocklist created with default blocked domains.");
 		return;
 	}
+	public static void blockedDays() {
+	}	
 }
