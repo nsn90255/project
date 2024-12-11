@@ -103,9 +103,6 @@ public class Project_main {
 			// var for the current line
 			String currentLine;
 			while((currentLine = rd.readLine()) !=null) {
-				if (currentLine.equals("block :")) {
-					continue;
-				}
 				wr.write(currentLine + "\n");
 			}
 		wr.close();
@@ -122,6 +119,9 @@ public class Project_main {
 			String currentLine;
 			wr.write("127.0.0.1 ");
 			while((currentLine = rd.readLine()) !=null) {
+				if (currentLine.equals("block :")) {
+					continue;
+				}
 				wr.write(currentLine + " ");
 			}
 		wr.close();
