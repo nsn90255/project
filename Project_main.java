@@ -24,7 +24,7 @@ import java.io.IOException;
 public class Project_main {
     
 	public static void main(String[] args) {
-		File blocklist = new File("/opt/blocklist");
+		File blocklist = new File("/etc/blocklist.conf");
 		// check if blocklist exists
 		if (!blocklist.exists()){
 			createBlocklist();
@@ -73,6 +73,7 @@ public class Project_main {
 		System.out.println("The blocklist is down.");
 	}
 	public static void block(File blocklist, String args[]){
+		// if already blocking stop
 		if (checkStatus()) {
 			System.out.println("Already blocking.");
 			return;
@@ -246,7 +247,7 @@ public class Project_main {
 	public static void createBlocklist() {
 		try {
 			// create the blocklist
-			File blocklist = new File("/opt/blocklist");
+			File blocklist = new File("/etc/blocklist.conf");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
 			wr.write("www.youtube.com\n" + "www.instagram.com\n" + "www.tiktok.com\n" + "www.facebook.com\n");
 			wr.close();
