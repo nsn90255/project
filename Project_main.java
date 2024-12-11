@@ -110,7 +110,7 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		// copy /opt/blocklist to /etc/hosts
+		// copy /etc/blocklist.conf to /etc/hosts
 		try {
 			//create reader & writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(hosts, true));
@@ -121,6 +121,12 @@ public class Project_main {
 			while((currentLine = rd.readLine()) !=null) {
 				if (currentLine.equals("block :") || currentLine.charAt(0) == '#') {
 					continue;
+				}
+				String[] notWrite = {"block :", "days :", "monday :", "tuesday :", "wednessday :", "thursday :", "friday :", "saturday :", "sunday :"};
+				for (int j = 0; j < 9; j++) {
+					if (currentLine == notWrite[j]) {
+						continue;
+					}
 				}
 				wr.write(currentLine + " ");
 			}
@@ -169,6 +175,7 @@ public class Project_main {
 				}
 			}
 			wr.close();
+			rd.close();
 		} catch (IOException e){
 			System.out.println("Error : " + e.getMessage());
 		}
