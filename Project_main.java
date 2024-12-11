@@ -33,37 +33,37 @@ public class Project_main {
 		if (args.length == 0){
 			help();
 			return;
-		} else if (args[0].equals("-u") || args[0].equals("--unblock")) {
+		} else if (args[0].equals("-u")) {
 			if (args.length > 1) {
 				help();
 				return;
 			} else {
 				unblock(blocklist, args);
 			}
-		} else if (args[0].equals("-b") || args[0].equals("--block")) {
+		} else if (args[0].equals("-b")) {
 			if (args.length > 1) {
 				help();
 				return;
 			} else {
 				block(blocklist, args);
 			}
-		} else if (args[0].equals("-a") || args[0].equals("--add")) {
+		} else if (args[0].equals("-a")) {
 			addBannedDomain(blocklist, sc, args);
-		} else if (args[0].equals("-r") || args[0].equals("--remove")) {
+		} else if (args[0].equals("-r")) {
 			removeBannedDomain(blocklist, sc, args);
-		} else if (args[0].equals("-s") || args[0].equals("--status")) {
+		} else if (args[0].equals("-s")) {
 			if (checkStatus()) {
-				System.out.println("Domains are being blocked.");
+				System.out.println("Is blocking right now.");
 			} else {
-				System.out.println("Domains are not being blocked.");
-			}
+				System.out.println("Is not blocking right now.");
+			}	
 		} else {
 			help();
 		}
 	}
 	public static void unblock(File blocklist, String args[]){
 		if (!checkStatus()) {
-			System.out.println("Blocklist already down.");
+			System.out.println("Not blocking right now. Nothing to do.");
 			return;
 		}
 		File hosts = new File("/etc/hosts");
@@ -74,7 +74,7 @@ public class Project_main {
 	}
 	public static void block(File blocklist, String args[]){
 		if (checkStatus()) {
-			System.out.println("Blocklist already down.");
+			System.out.println("Already blocking.");
 			return;
 		}
 		File backup = new File("/etc/hosts.bkp");
@@ -127,17 +127,19 @@ public class Project_main {
 		}
 		System.out.println("The blocklist is up.");
 	}
-// MAKE CHECK IF BLOCKING OR NOT BEFORE REMOVING OR ADDING DOMAINS
 	public static void addBannedDomain(File blocklist, Scanner sc, String[] args){
+		// if blocking prevent user from editing config
+		if (checkStatus()) {
+			System.out.println("Blocking right now. Unblock and try again.");
+			return;
+		}
 		// if no domain is specified print help and return to main
 		if (args.length < 2) {
 			help();
 			return;
 		}
 		try{
-			// Create writer
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
-			// Create reader
 			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
 			// loop through every argument starting from the second one
 			for (int i = 1; i < args.length; i++){
@@ -168,6 +170,12 @@ public class Project_main {
 		}
 	}
 	public static void removeBannedDomain(File blocklist, Scanner sc, String[] args){
+		// if blocking prevent user from editing config
+		if (checkStatus()) {
+			System.out.println("Blocking right now. Unblock and try again.");
+			return;
+		}
+		// if no arguments stop here
 		if (args.length < 2) {
 			help();
 			return;
@@ -242,7 +250,6 @@ public class Project_main {
 		// added just in case (compiler complains otherwise)
 		return false;
 	}
-	// maybe make this universal, not just for hosts
 	public static boolean checkStatus() {
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
@@ -253,8 +260,11 @@ public class Project_main {
 	}
 	public static void help(){
 		System.out.println("Usage : project [command] [domain]");
-		System.out.println(" --help\t\t\t\t\tPrint this.\n -u, --unblock\t\t\t\tUnblock domains.\n -b, --block\t\t\t\tBlock domains.\n -a, -add\t\t\t\tAdd a domain to block.\n -r, --remove\t\t\t\tRemove a blocked domain.\n -s, --status\t\t\t\tCheck if running or not.");
-
+		System.out.println("  -u\t\t\t\tUnblock domains.");
+		System.out.println("  -b\t\t\t\tBlock domains.");
+		System.out.println("  -a\t\t\t\tAdd a domain to block.");
+		System.out.println("  -r\t\t\t\tRemove a blocked domain.");
+		System.out.println("  -s\t\t\t\tCheck if running or not.");
 	}
 	public static void createBlocklist() {
 		try {
