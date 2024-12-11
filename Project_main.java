@@ -52,15 +52,18 @@ public class Project_main {
 		} else if (args[0].equals("-r")) {
 			removeBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-s")) {
-			checkStatus();
+			if (checkStatus()) {
+				System.out.println("Is blocking right now.");
+			} else {
+				System.out.println("Is not blocking right now.");
+			}	
 		} else {
 			help();
 		}
 	}
 	public static void unblock(File blocklist, String args[]){
-		File doesBackupExist = new File("/etc/hosts.bkp");
-		if (!doesBackupExist.exists()) {
-			System.out.println("Blocklist already down.");
+		if (!checkStatus()) {
+			System.out.println("Not blocking right now. Nothing to do.");
 			return;
 		}
 		File hosts = new File("/etc/hosts");
@@ -70,9 +73,8 @@ public class Project_main {
 		System.out.println("The blocklist is down.");
 	}
 	public static void block(File blocklist, String args[]){
-		File doesBackupExist = new File("/etc/hosts.bkp");
-		if (doesBackupExist.exists()) {
-			System.out.println("Blocklist already up.");
+		if (checkStatus()) {
+			System.out.println("Already blocking.");
 			return;
 		}
 		File backup = new File("/etc/hosts.bkp");
@@ -241,10 +243,8 @@ public class Project_main {
 	public static boolean checkStatus() {
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
-			System.out.println("Domains are being blocked.");
 			return true;
 		} else {
-			System.out.println("Domains are not being blocked.");
 			return false;
 		}
 	}
