@@ -281,10 +281,10 @@ public class Project_main {
 	public static void blockedDays() {
 	}	
 	public static void checkStatus() {
-		if (checkBlocking()) {
-			System.out.println("Is blocking right now.");
-		} else {
-			System.out.println("Is not blocking right now.");
+		String not = "";
+		if (!checkBlocking()) {
+			not = "Not ";
 		}	
+		System.out.println("Status : [" + not + "Blocking]");
 	}
 }
