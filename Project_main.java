@@ -250,8 +250,11 @@ public class Project_main {
 	}
 	public static void help(){
 		System.out.println("Usage : project [command] [domain]");
-		System.out.println("  -u\t\t\t\tUnblock domains.\n  -b\t\t\t\tBlock domains.\n  -a\t\t\t\tAdd a domain to block.\n  -r\t\t\t\tRemove a blocked domain.\n  -s\t\t\t\tCheck if running or not.");
-
+		System.out.println("  -u\t\t\t\tUnblock domains.");
+		System.out.println("  -b\t\t\t\tBlock domains.");
+		System.out.println("  -a\t\t\t\tAdd a domain to block.");
+		System.out.println("  -r\t\t\t\tRemove a blocked domain.");
+		System.out.println("  -s\t\t\t\tCheck if running or not.");
 	}
 	public static void createBlocklist() {
 		try {
