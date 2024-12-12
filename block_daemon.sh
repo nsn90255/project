@@ -1,5 +1,4 @@
 #!/bin/sh
-day=$(date | awk -F ' ' '{print $1}')
-hour=$(date)
-minute=$(date)
-echo $day
+day=$(date +%u)
+hour=$(date +%H)
+minute=$(date +%M)
