@@ -118,8 +118,8 @@ public class Project_main {
 				if (currentLine.equals("block :") || currentLine.charAt(0) == '#') {
 					continue;
 				}
-				String[] notWrite = {"block :", "monday :", "tuesday :", "wednessday :", "thursday :", "friday :", "saturday :", "sunday :"};
-				for (int j = 0; j < 9; j++) {
+				String notWrite[] = {"monday :", "tuesday :", "wednessday :", "thursday :", "friday :", "saturday :", "sunday :"};
+				for (int j = 0; j < 7; j++) {
 					if (currentLine == notWrite[j]) {
 						continue;
 					}
