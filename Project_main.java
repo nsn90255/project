@@ -263,11 +263,9 @@ public class Project_main {
 			wr.write("# www.facebook.com\n");
 			wr.write("# write your days to block here\n");
 			wr.write("# example :\n");
-			wr.write("# monday :\n");
-			wr.write("# \t00:15 12:00\n");
+			wr.write("# monday : 00:15 12:00\n");
 			wr.write("# block on mondays from 00:15 to 13:00\n");
-			wr.write("# tuesday :\n");
-			wr.write("# \tall\n");
+			wr.write("# tuesday : all\n");
 			wr.write("# block all tuesday long\n");
 			
 			wr.close();
