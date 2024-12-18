@@ -262,8 +262,6 @@ public class Project_main {
 			wr.write("# www.tiktok.com\n");
 			wr.write("# www.facebook.com\n");
 			wr.write("# write your days to block here\n");
-			wr.write("# monday : 00:15 12:00\n");
-			wr.write("# tuesday : all\n");
 			
 			wr.close();
 		} catch (IOException e) {

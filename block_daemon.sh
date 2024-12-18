@@ -2,9 +2,9 @@
 day=$(date +%u)
 hour=$(date +%H)
 minute=$(date +%M)
-if [ "$( grep monday /etc/blocklist.conf | awk -F ' : ' '{print $2}')" = "all" ]
+if [ "$( grep $day /etc/blocklist.conf | awk -F ' : ' '{print $2}')" = "all" ]
 then
-	echo 'blocking all monday'
+	echo 'this is the part where you block'
 else 
-	echo 'not blocking all monday'
+	echo 'not blocking'
 fi 
