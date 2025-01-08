@@ -115,16 +115,19 @@ public class Project_main {
 			String currentLine;
 			wr.write("127.0.0.1 ");
 			while((currentLine = rd.readLine()) !=null) {
-				if (currentLine.equals("[domains]") || currentLine.equals("[days]") || currentLine.charAt(0) == '#') {
+				/*if (currentLine.equals("[domains]") || currentLine.equals("[days]") || currentLine.charAt(0) == '#') {
 					continue;
-				}
-				String notWrite[] = {"1=", "2=", "3=", "4=", "5=", "6=", "7="};
-				for (int j = 0; j < 7; j++) {
-					if (currentLine == notWrite[j]) {
-						continue;
+				}*/
+				char notWrite[] = { '1', '2', '3', '4', '5', '6', '7', '[', '#' };
+				boolean doWeWrite = true;
+				for (int j = 0; j < 9; j++) {
+					if (currentLine.charAt(0) == notWrite[j]) {
+						doWeWrite = false;
 					}
 				}
-				wr.write(currentLine + " ");
+				if (doWeWrite) {
+					wr.write(currentLine + " ");
+				}
 			}
 		wr.close();
 		rd.close();
