@@ -19,5 +19,7 @@ cd ../
 cp block_daemon.sh /usr/local/bin/block_daemon.sh
 if [ -d /lib/systemd ]; then
 	cp systemd/project.service /etc/systemd/system/project.service
+else
+	echo "This program only supports systemd for now."
 fi
 echo "tada!!"
