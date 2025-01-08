@@ -1,4 +1,9 @@
 #!/bin/sh
+set -e
+if [ "$(basename $(pwd))" != project ]; then
+	echo "Run in main project directory"
+	exit 1
+fi
 if [ -d build ]; then
 	rm -r build
 fi
