@@ -53,6 +53,8 @@ public class Project_main {
 			removeBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-s")) {
 			checkStatus();
+		} else if (args[0].equals("-v")) {
+			version();
 		} else {
 			help();
 		}
@@ -252,6 +254,7 @@ public class Project_main {
 		System.out.println("  -a\t\t\t\tAdd a domain to block.");
 		System.out.println("  -r\t\t\t\tRemove a blocked domain.");
 		System.out.println("  -s\t\t\t\tCheck if running or not.");
+		System.out.println("  -v\t\t\t\tPrint version information.");
 	}
 	public static void createBlocklist() {
 		try {
@@ -282,5 +285,8 @@ public class Project_main {
 			not = "Not ";
 		}	
 		System.out.println("Status : [" + not + "Blocking]");
+	}
+	public static void version() {
+		System.out.println("Project ALPHA 1.0");
 	}
 }
