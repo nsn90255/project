@@ -115,7 +115,7 @@ public class Project_main {
 			String currentLine;
 			wr.write("127.0.0.1 ");
 			while((currentLine = rd.readLine()) !=null) {
-				if (currentLine.equals("block :") || currentLine.charAt(0) == '#') {
+				if (currentLine.equals("[domains]") || currentLine.equals("[days]") || currentLine.charAt(0) == '#') {
 					continue;
 				}
 				String notWrite[] = {"1=", "2=", "3=", "4=", "5=", "6=", "7="};
