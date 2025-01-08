@@ -259,13 +259,13 @@ public class Project_main {
 			File blocklist = new File("/etc/blocklist.conf");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
 			wr.write("# write your websites to block here\n");
-			wr.write("[websites]\n");
+			wr.write("[Domains]\n");
 			wr.write("www.youtube.com\n");
 			wr.write("# www.instagram.com\n");
 			wr.write("# www.tiktok.com\n");
 			wr.write("# www.facebook.com\n");
 			wr.write("# write your days to block here\n");
-			wr.write("[days]\n");
+			wr.write("[Days]\n");
 			
 			wr.close();
 		} catch (IOException e) {
