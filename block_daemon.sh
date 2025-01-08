@@ -6,9 +6,9 @@ do
 	minute=$(date +%M)
 	if [ "$( grep $day /etc/blocklist.conf | awk -F ' : ' '{print $2}')" = "all" ]
 		then
-			echo 'this is the part where you block'
+			$(project -b > /dev/null)
 		else 
-			echo 'not blocking'
+			$(project -u > /dev/null)
 	fi 
 	sleep 60
 done
