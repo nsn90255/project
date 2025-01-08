@@ -3,7 +3,7 @@ Description=Domain blocker tool
 After=network.target
 
 [Service]
-ExecStart=/bin/sh /usr/local/sbin/block_daemon.sh
+ExecStart=/bin/sh /usr/local/bin/block_daemon.sh
 
 [Install]
 WantedBy=multi-user.target
