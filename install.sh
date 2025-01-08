@@ -7,6 +7,8 @@ fi
 if [ -d /etc/systemd ]; then
 	cp systemd/project.service /etc/systemd/system/project.service
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
+	systemctl enable project
+	systemctl start project
 else
 	echo "This program only supports systemd for now."
 	exit 1
