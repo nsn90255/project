@@ -118,7 +118,7 @@ public class Project_main {
 				if (currentLine.equals("block :") || currentLine.charAt(0) == '#') {
 					continue;
 				}
-				String notWrite[] = {"monday :", "tuesday :", "wednessday :", "thursday :", "friday :", "saturday :", "sunday :"};
+				String notWrite[] = {"1=", "2=", "3=", "4=", "5=", "6=", "7="};
 				for (int j = 0; j < 7; j++) {
 					if (currentLine == notWrite[j]) {
 						continue;
@@ -256,12 +256,13 @@ public class Project_main {
 			File blocklist = new File("/etc/blocklist.conf");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
 			wr.write("# write your websites to block here\n");
-			wr.write("block :\n");
+			wr.write("[websites]\n");
 			wr.write("www.youtube.com\n");
 			wr.write("# www.instagram.com\n");
 			wr.write("# www.tiktok.com\n");
 			wr.write("# www.facebook.com\n");
 			wr.write("# write your days to block here\n");
+			wr.write("[days]\n");
 			
 			wr.close();
 		} catch (IOException e) {
