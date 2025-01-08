@@ -9,6 +9,7 @@ if [ -d /etc/systemd ]; then
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
 else
 	echo "This program only supports systemd for now."
+	exit 1
 fi
 if [ -d build ]; then
 	rm -r build
