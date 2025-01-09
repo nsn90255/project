@@ -13,6 +13,10 @@ else
 	echo "This program only supports systemd for now."
 	exit 1
 fi
+if ! [ -d /usr/local/man/man8 ]; then
+	mkdir /usr/local/man/man8
+fi
+cp man_pages/project.8 /usr/local/man/man8/project.8
 if [ -d build ]; then
 	rm -r build
 fi
