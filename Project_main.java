@@ -248,7 +248,7 @@ public class Project_main {
 		}
 	}
 	public static void help(){
-		System.out.println("Usage : project [command] [domain]");
+		System.out.println("Usage : project [command] \033[3mdomain\033[0m");
 		System.out.println("  -u\t\t\t\tUnblock domains.");
 		System.out.println("  -b\t\t\t\tBlock domains.");
 		System.out.println("  -a\t\t\t\tAdd a domain to block.");
