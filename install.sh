@@ -8,12 +8,12 @@ if which systemctl &> /dev/null;then
 	cp service_files/systemd/project.service /etc/systemd/system/project.service
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
 	systemctl enable project
-	systemctl start project
+	#systemctl start project
 elif which rc-status &> /dev/null;then
 	cp service_files/openrc/project /etc/init.d/project
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
 	rc-update add project default
-	rc-service project start
+	#rc-service project start
 else
 	echo "This program only supports systemd and openrc"
 	exit 1
@@ -34,4 +34,5 @@ chmod 744 /usr/local/bin/project.jar
 echo '#!/bin/sh' > /usr/local/bin/project
 echo 'java -jar /usr/local/bin/project.jar "$@"' >> /usr/local/bin/project
 cd ../
+project -s
 echo "tada!!"
