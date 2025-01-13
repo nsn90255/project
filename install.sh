@@ -4,7 +4,7 @@ if [ "$(basename $(pwd))" != project ]; then
 	echo "Run in main project directory"
 	exit 1
 fi
-systemctl
+systemctl > /dev/null
 if [ $? -ne 0 ];then
 	echo "This program only supports systemd or openrc"
 	exit 1
