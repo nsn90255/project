@@ -4,14 +4,25 @@ if [ "$(basename $(pwd))" != project ]; then
 	echo "Run in main project directory"
 	exit 1
 fi
-if [ -d /etc/systemd ]; then
-	cp systemd/project.service /etc/systemd/system/project.service
+systemctl
+if [ $? -ne 0 ];then
+	echo "This program only supports systemd or openrc"
+	exit 1
+else
+	cp service_files/systemd/project.service /etc/systemd/system/project.service
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
 	systemctl enable project
 	systemctl start project
-else
-	echo "This program only supports systemd for now."
+fi
+rc-status > /dev/null
+if [ $? -ne 0 ];then
+	echo "This program only supports systemd or openrc"
 	exit 1
+else
+	cp service_files/openrc/project /etc/init.d/project
+	cp block_daemon.sh /usr/local/bin/block_daemon.sh
+	rc-update add project default
+	rc-service project start
 fi
 if ! [ -d /usr/local/man/man8 ]; then
 	mkdir /usr/local/man/man8
