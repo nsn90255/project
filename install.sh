@@ -12,6 +12,7 @@ if which systemctl &> /dev/null;then
 elif which rc-status &> /dev/null;then
 	cp service_files/openrc/project /etc/init.d/project
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
+	chmod 755 /etc/init.d/project
 	rc-update add project default
 	#rc-service project start
 else
