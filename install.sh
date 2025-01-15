@@ -37,4 +37,9 @@ echo 'java -jar /usr/local/bin/project.jar "$@"' >> /usr/local/bin/project
 cd ../
 chmod 744 /usr/local/bin/project
 project -s > /dev/null
+if which systemctl &> /dev/null;then
+	systemctl restart project
+elif which rc-status &> /dev/null;then
+	rc-service project restart
+fi
 echo "tada!!"
