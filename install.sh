@@ -1,9 +1,5 @@
 #!/bin/sh
 set -e
-if [ "$(basename $(pwd))" != project ]; then
-	echo "Run in main project directory"
-	exit 1
-fi
 if which systemctl &> /dev/null;then
 	cp service_files/systemd/project.service /etc/systemd/system/project.service
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh

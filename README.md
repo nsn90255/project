@@ -1,5 +1,5 @@
 # Install
-Run the install script as root.
+Run the install script as root **in the main project directory**.
 ```
 # ./install
 ```
