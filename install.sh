@@ -8,13 +8,11 @@ if which systemctl &> /dev/null;then
 	cp service_files/systemd/project.service /etc/systemd/system/project.service
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
 	systemctl enable project
-	#systemctl start project
 elif which rc-status &> /dev/null;then
 	cp service_files/openrc/project /etc/init.d/project
 	cp block_daemon.sh /usr/local/bin/block_daemon.sh
 	chmod 755 /etc/init.d/project
 	rc-update add project default
-	#rc-service project start
 else
 	echo "This program only supports systemd and openrc"
 	exit 1
