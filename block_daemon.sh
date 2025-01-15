@@ -5,10 +5,12 @@ do
 	hour=$(date +%H)
 	minute=$(date +%M)
 	comandino=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
+	comandino2=$(echo "$comandino" | awk -F '-' '{print $1}')
+	comandino3=$(echo "$comandino" | awk -F '-' '{print $2}')
 	if [ "$comandino" = "all" ];then
 		echo first if
 		$(project -b > /dev/null)
-	elif [ "$(echo "$comandino" | awk -F '-' '{print $1}')" -lt "$hour$minute" ]; then
+	elif [ "$comandino2" -lt "$hour$minute" && "$comandino2" -gt "$hour$minute" ]; then
 		echo second if
 		$(project -b > /dev/null)
 	else 
