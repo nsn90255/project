@@ -4,13 +4,13 @@ do
 	day=$(date +%u)
 	hour=$(date +%H)
 	minute=$(date +%M)
-	comandino=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
-	comandino2=$(echo "$comandino" | awk -F '-' '{print $1}')
-	comandino3=$(echo "$comandino" | awk -F '-' '{print $2}')
-	if [ "$comandino" = "all" ];then
+	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
+	first_time=$(echo "$extract_after_day" | awk -F '-' '{print $1}')
+	second_time=$(echo "$extract_after_day" | awk -F '-' '{print $2}')
+	if [ "$extract_after_day" = "all" ];then
 		echo first if
 		$(project -b > /dev/null)
-	elif [ "$comandino2" -lt "$hour$minute" && "$comandino2" -gt "$hour$minute" ]; then
+	elif [ "$first_time" -le "$hour$minute" ] && [ "$second_time" -ge "$hour$minute" ]; then
 		echo second if
 		$(project -b > /dev/null)
 	else 
