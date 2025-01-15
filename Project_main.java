@@ -173,7 +173,7 @@ public class Project_main {
 					wr.write(toBlock + "\n");
 					System.out.println(toBlock + " has been added to the blocklist.");
 				} else {
-					System.out.println(toBlock + " is already in the blocklist the blocklist.");
+					System.out.println(toBlock + " is already in the blocklist.");
 				}
 			}
 			wr.close();
