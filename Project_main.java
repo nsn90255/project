@@ -194,7 +194,7 @@ public class Project_main {
 			return;
 		}
 		try{
-			File tempFile = new File("blocklist.temp");
+			File tempFile = new File("/tmp/project/blocklist.temp");
 			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
 			BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile));
 			boolean domainRemoved = false;
