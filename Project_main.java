@@ -169,6 +169,7 @@ public class Project_main {
 					}
 				}
 				if (write == true) {
+					// add code here
 					wr.write(toBlock + "\n");
 					System.out.println(toBlock + " has been added to the blocklist.");
 				} else {
@@ -261,14 +262,21 @@ public class Project_main {
 			// create the blocklist
 			File blocklist = new File("/etc/blocklist.conf");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
+			wr.write("# write your days to block here\n");
+			wr.write("[Days]\n");
+			wr.write("1=\n");
+			wr.write("2=\n");
+			wr.write("3=\n");
+			wr.write("4=\n");
+			wr.write("5=\n");
+			wr.write("6=\n");
+			wr.write("7=\n");
 			wr.write("# write your websites to block here\n");
 			wr.write("[Domains]\n");
 			wr.write("www.youtube.com\n");
 			wr.write("# www.instagram.com\n");
 			wr.write("# www.tiktok.com\n");
 			wr.write("# www.facebook.com\n");
-			wr.write("# write your days to block here\n");
-			wr.write("[Days]\n");
 			
 			wr.close();
 		} catch (IOException e) {
