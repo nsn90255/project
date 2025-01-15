@@ -4,11 +4,16 @@ do
 	day=$(date +%u)
 	hour=$(date +%H)
 	minute=$(date +%M)
-	if [ "$( grep $day /etc/blocklist.conf | awk -F '=' '{print $2}')" = "all" ]
-		then
-			$(project -b > /dev/null)
-		else 
-			$(project -u > /dev/null)
+	comandino=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
+	if [ "$comandino" = "all" ];then
+		echo first if
+		$(project -b > /dev/null)
+	elif [ "$(echo "$comandino" | awk -F '-' '{print $1}')" -lt "$hour$minute" ]; then
+		echo second if
+		$(project -b > /dev/null)
+	else 
+		echo else
+		$(project -u > /dev/null)
 	fi 
-	sleep 60
+	sleep 10
 done
