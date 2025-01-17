@@ -7,6 +7,8 @@ do
 	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
 	first_time=$(echo "$extract_after_day" | awk -F '-' '{print $1}')
 	second_time=$(echo "$extract_after_day" | awk -F '-' '{print $2}')
+	third_time=$(echo "$extract_after_day" | awk -F '-' '{print $3}')
+	fourth_time=$(echo "$extract_after_day" | awk -F '-' '{print $4}')
 	if [ "$extract_after_day" = "all" ];then
 		echo first if
 		$(project -b > /dev/null)
