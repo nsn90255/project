@@ -299,8 +299,21 @@ public class Project_main {
 	public static void version() {
 		System.out.println("Project ALPHA 1.0");
 	}
-	public static void checkIfCanIgnore() {
-		// check
+	public static boolean checkIfCanIgnore() {
+		try {
+			File log = new File("blockdaemon.log");
+			BufferedReader br = new BufferedReader(new FileReader(log));
+			String lineRead = "nothing";
+			while ((tmp = br.realLine()) != null) {
+				lineRead = tmp;
+			}
+			String lastLine = lineRead;
+			br.close();
+		} catch (IOException e) {
+			System.out.println("Error : " + e.getMessage());
+		}
+		LocalDateTime dateRightNow = LocalDateTime.now();
+		// check here	
 	}
 	public static void writeLog() {
 		LocalDateTime dateRightNow = LocalDateTime.now();
