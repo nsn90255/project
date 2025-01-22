@@ -59,7 +59,7 @@ public class Project_main {
 			version();
 		} else if (args[0].equals("-i")) {
 			// for testing purposes
-			writeLog();
+			checkIfCanIgnore();
 		} else {
 			help();
 		}
@@ -300,20 +300,24 @@ public class Project_main {
 		System.out.println("Project ALPHA 1.0");
 	}
 	public static boolean checkIfCanIgnore() {
+		String lastLine = null;
 		try {
 			File log = new File("blockdaemon.log");
 			BufferedReader br = new BufferedReader(new FileReader(log));
-			String lineRead = "nothing";
-			while ((tmp = br.realLine()) != null) {
+			String lineRead = null, tmp;
+			while ((tmp = br.readLine()) != null) {
 				lineRead = tmp;
 			}
-			String lastLine = lineRead;
+			lastLine = lineRead;
 			br.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
 		LocalDateTime dateRightNow = LocalDateTime.now();
 		// check here	
+		System.out.println(lastLine);
+		// for now
+		return false;
 	}
 	public static void writeLog() {
 		LocalDateTime dateRightNow = LocalDateTime.now();
