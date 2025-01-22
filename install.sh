@@ -33,6 +33,7 @@ chmod 744 /usr/local/bin/project.jar
 echo '#!/bin/sh' > /usr/local/bin/project
 echo 'java -jar /usr/local/bin/project.jar "$@"' >> /usr/local/bin/project
 cd ../
+touch /var/log/blockdeamon.log
 chmod 744 /usr/local/bin/project
 project -s > /dev/null
 if which systemctl &> /dev/null;then
