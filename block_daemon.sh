@@ -2,8 +2,7 @@
 while :
 do
 	day=$(date +%u)
-	hour=$(date +%H)
-	minute=$(date +%M)
+	hourminute=$(date +%H%M)
 	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
 	first_time=$(echo "$extract_after_day" | awk -F '-' '{print $1}')
 	second_time=$(echo "$extract_after_day" | awk -F '-' '{print $2}')
@@ -12,11 +11,11 @@ do
 	if [ "$extract_after_day" = "all" ];then
 		echo first if
 		$(project -b > /dev/null)
-	elif [ "$first_time" -le "$hour$minute" ] && [ "$second_time" -ge "$hour$minute" ]; then
+	elif [ "$first_time" -le "$hourminute" ] && [ "$second_time" -ge "$hourminute" ]; then
 		echo second if
 		$(project -b > /dev/null)
-	elif [ "$third_time" -le "$hour$minute" ] && [ "$fourth_time" -ge "$hour$minute" ]; then
-		echo second if
+	elif [ "$third_time" -le "$hourminute" ] && [ "$fourth_time" -ge "$hourminute" ]; then
+		echo third if
 		$(project -b > /dev/null)
 	else 
 		echo else
