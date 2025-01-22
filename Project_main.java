@@ -288,8 +288,6 @@ public class Project_main {
 		System.out.println("Blocklist created with default blocked domains.");
 		return;
 	}
-	public static void blockedDays() {
-	}	
 	public static void checkStatus() {
 		String not = "";
 		if (!checkBlocking()) {
@@ -308,7 +306,7 @@ public class Project_main {
 		try {
 			File log = new File("blockdaemon.log");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(log, true));
-			wr.write(dateRightNow + "\n");
+			wr.write("Ignoring @ " + dateRightNow + "\n");
 			wr.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
