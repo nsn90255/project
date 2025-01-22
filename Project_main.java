@@ -281,7 +281,6 @@ public class Project_main {
 			wr.write("# www.instagram.com\n");
 			wr.write("# www.tiktok.com\n");
 			wr.write("# www.facebook.com\n");
-			
 			wr.close();
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
@@ -306,7 +305,14 @@ public class Project_main {
 	}
 	public static void writeLog() {
 		LocalDateTime dateRightNow = LocalDateTime.now();
-		System.out.println(dateRightNow);
+		try {
+			File log = new File("blockdeamon.log");
+			BufferedWriter wr = new BufferedWriter(new FileWriter(log, true));
+			wr.write(dateRightNow + "\n");
+			wr.close();
+		} catch (IOException e) {
+			System.out.println("Error : " + e.getMessage());
+		}
 	}
 	public static void ignore() {
 		// call checkIfCanIgnore()
