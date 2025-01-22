@@ -58,6 +58,7 @@ public class Project_main {
 		} else if (args[0].equals("-v")) {
 			version();
 		} else if (args[0].equals("-i")) {
+			// for testing purposes
 			writeLog();
 		} else {
 			help();
