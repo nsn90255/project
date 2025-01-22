@@ -306,7 +306,7 @@ public class Project_main {
 	public static void writeLog() {
 		LocalDateTime dateRightNow = LocalDateTime.now();
 		try {
-			File log = new File("blockdeamon.log");
+			File log = new File("blockdaemon.log");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(log, true));
 			wr.write(dateRightNow + "\n");
 			wr.close();
