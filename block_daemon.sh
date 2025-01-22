@@ -15,6 +15,9 @@ do
 	elif [ "$first_time" -le "$hour$minute" ] && [ "$second_time" -ge "$hour$minute" ]; then
 		echo second if
 		$(project -b > /dev/null)
+	elif [ "$third_time" -le "$hour$minute" ] && [ "$fourth_time" -ge "$hour$minute" ]; then
+		echo second if
+		$(project -b > /dev/null)
 	else 
 		echo else
 		$(project -u > /dev/null)
