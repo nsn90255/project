@@ -20,6 +20,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Project_main {
     
@@ -55,6 +57,8 @@ public class Project_main {
 			checkStatus();
 		} else if (args[0].equals("-v")) {
 			version();
+		} else if (args[0].equals("-i")) {
+			writeLog();
 		} else {
 			help();
 		}
@@ -296,5 +300,17 @@ public class Project_main {
 	}
 	public static void version() {
 		System.out.println("Project ALPHA 1.0");
+	}
+	public static void checkIfCanIgnore() {
+		// check
+	}
+	public static void writeLog() {
+		LocalDateTime dateRightNow = LocalDateTime.now();
+		System.out.println(dateRightNow);
+	}
+	public static void ignore() {
+		// call checkIfCanIgnore()
+		// if true = call writeLog()
+		// call block()
 	}
 }
