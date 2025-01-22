@@ -1,6 +1,10 @@
 #!/bin/sh
 while :
 do
+	ignore=$(grep ignore /etc/blocklist.conf | awk -F '=' '{print $2}') 
+	if [ "$ignore" = "true" ]; then
+		sleep 60
+	fi
 	day=$(date +%u)
 	hourminute=$(date +%H%M)
 	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
