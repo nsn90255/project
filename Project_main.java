@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.DateTimeException;
 
 public class Project_main {
     
@@ -313,9 +314,15 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		LocalDateTime dateRightNow = LocalDateTime.now();
+		//LocalDateTime dateRightNow = LocalDateTime.now();
+		try {
+			LocalDateTime datePlusOneHour = LocalDateTime.plusHours(1);
+			System.out.println("time + 1h : " + datePlusOneHour);
+		} catch (DateTimeException d) {
+			System.out.println("Error : " + d.getMessage());
+		}
 		// check here	
-		System.out.println(lastLine);
+		System.out.println("last line : " + lastLine);
 		// for now
 		return false;
 	}
