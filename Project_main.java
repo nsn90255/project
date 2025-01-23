@@ -316,7 +316,8 @@ public class Project_main {
 		}
 		//LocalDateTime dateRightNow = LocalDateTime.now();
 		try {
-			LocalDateTime datePlusOneHour = LocalDateTime.plusHours(1);
+			LocalDateTime now = LocalDateTime.now();
+			LocalDateTime datePlusOneHour = now.plusHours(1);
 			System.out.println("time + 1h : " + datePlusOneHour);
 		} catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
