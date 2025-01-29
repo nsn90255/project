@@ -329,13 +329,13 @@ public class Project_main {
 		try {
 			LocalDateTime timeNow = LocalDateTime.now();
 			if ((timeNow.getYear() - yearInLastLine) > 0) {
-				returntrue = true;
+				returnTrue = true;
 			} else if ((timeNow.getMonthValue() - monthInLastLine) > 0) {
-				returntrue = true;
+				returnTrue = true;
 			} else if ((timeNow.getDayOfMonth() - dayOfMonthInLastLine) > 0) {
-				returntrue = true;
+				returnTrue = true;
 			} else if (((timeNow.getDayOfMonth() - dayOfMonthInLastLine) == 0) && ((timeNow.getHour() - hourInLastLine) > 0)) {
-				returntrue = true;
+				returnTrue = true;
 			} else {
 				System.out.println("you cannot ignore rn");
 			}
