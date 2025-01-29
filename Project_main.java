@@ -20,9 +20,10 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.DateTimeException;
+//import java.time.LocalDateTime;
+//import java.time.format.DateTimeFormatter;
+//import java.time.DateTimeException;
+import java.time.*;
 
 public class Project_main {
     
@@ -292,7 +293,8 @@ public class Project_main {
 	}
 	public static boolean checkIfCanIgnore() {
 		String lastLine = null;
-		// get last line from log
+		int hourInLastLine, minuteInLastLine = 0;
+		// get last line from log; store in lastLine
 		try {
 			File log = new File("blockdaemon.log");
 			BufferedReader br = new BufferedReader(new FileReader(log));
@@ -310,10 +312,13 @@ public class Project_main {
 			LocalDateTime now = LocalDateTime.now();
 			LocalDateTime datePlusOneHour = now.plusHours(1);
 			System.out.println("time + 1h : " + datePlusOneHour);// will remove later
+			hourInLastLine = datePlusOneHour.getHour();
+			minuteInLastLine = datePlusOneHour.getMinute();
+			System.out.println("int : " + hourInLastLine + "\nminute : " + minuteInLastLine);
 		} catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
 		}
-		// check here	
+		// TODO:check here	
 		System.out.println("last line : " + lastLine);// will remove later
 		// for now
 		return false;
