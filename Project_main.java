@@ -302,6 +302,7 @@ public class Project_main {
 	}
 	public static boolean checkIfCanIgnore() {
 		String lastLine = null;
+		// get last line from log
 		try {
 			File log = new File("blockdaemon.log");
 			BufferedReader br = new BufferedReader(new FileReader(log));
@@ -314,15 +315,16 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
+		// get time now
 		try {
 			LocalDateTime now = LocalDateTime.now();
 			LocalDateTime datePlusOneHour = now.plusHours(1);
-			System.out.println("time + 1h : " + datePlusOneHour);
+			System.out.println("time + 1h : " + datePlusOneHour);// will remove later
 		} catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
 		}
 		// check here	
-		System.out.println("last line : " + lastLine);
+		System.out.println("last line : " + lastLine);// will remove later
 		// for now
 		return false;
 	}
