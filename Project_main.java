@@ -36,20 +36,10 @@ public class Project_main {
 		if (args.length == 0){
 			help();
 			return;
-		} else if (args[0].equals("-u")) {
-			if (args.length > 1) {
-				help();
-				return;
-			} else {
-				unblock(blocklist, args);
-			}
-		} else if (args[0].equals("-b")) {
-			if (args.length > 1) {
-				help();
-				return;
-			} else {
-				block(blocklist, args);
-			}
+		} else if ((args[0].equals("-u")) && (args.length < 2)) {
+			unblock(blocklist, args);
+		} else if ((args[0].equals("-b")) && (args.length < 2)) {
+			block(blocklist, args);
 		} else if (args[0].equals("-a")) {
 			addBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-r")) {
@@ -315,7 +305,7 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		// get time now
+		// get time now; add an hour
 		try {
 			LocalDateTime now = LocalDateTime.now();
 			LocalDateTime datePlusOneHour = now.plusHours(1);
