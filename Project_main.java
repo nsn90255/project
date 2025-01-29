@@ -326,10 +326,19 @@ public class Project_main {
 		}
 		// compare
 		System.out.println(yearInLastLine + " " + monthInLastLine + " " + dayOfMonthInLastLine + " " + hourInLastLine + " " + minuteInLastLine);// will delete
+		boolean returnTrue = false;
 		try {
 			LocalDateTime timeNow = LocalDateTime.now();
-			if (dayOfMonthInLastLine < timeNow.getDayOfMonth()) {
-				System.out.println("can ignore");
+			if ((timeNow.getYear() - yearInLastLine) > 0) {
+				returntrue = true;
+			} else if ((timeNow.getMonthValue() - monthInLastLine) > 0) {
+				returntrue = true;
+			} else if ((timeNow.getDayOfMonth() - dayOfMonthInLastLine) > 0) {
+				returntrue = true;
+			} else if (((timeNow.getDayOfMonth() - dayOfMonthInLastLine) == 0) && ((timeNow.getHour() - hourInLastLine) > 0)) {
+				returntrue = true;
+			} else {
+				System.out.println("you cannot ignore rn");
 			}
 		} catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
@@ -366,7 +375,11 @@ public class Project_main {
 			System.out.println("Error : " + d.getMessage());
 		}
 		*/
-		return false;
+		if (returnTrue) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	public static void writeLog() {
 		LocalDateTime dateRightNow = LocalDateTime.now();
@@ -380,8 +393,12 @@ public class Project_main {
 		}
 	}
 	public static void ignore() {
-		// call checkIfCanIgnore()
-		// if true = call writeLog()
-		// call block()
+		if (checkIfCanIgnore()) {
+			writeLog();
+			unblock();
+			System.out.println("Successfully written to log and unblocked");
+		} else {
+			System.out.println("you cannot do that right now");
+		{
 	}
 }
