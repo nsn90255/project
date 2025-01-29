@@ -306,13 +306,31 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		// parse string, get hour and minute
+		// extract time string from last line and asign int variables
+		String separateDate[] = lastLine.split(" @ ");
+		int yearInLastLine = 0;
+		int monthInLastLine = 0;
+		int dayOfMonthInLastLine = 0;
+		int hourInLastLine = 0;
+		int minuteInLastLine = 0;
+		try {
+			LocalDateTime timeObj = LocalDateTime.parse(separateDate[1]);
+			yearInLastLine = timeObj.getYear();
+			monthInLastLine = timeObj.getHour();
+			dayOfMonthInLastLine = timeObj.getMonth();
+			hourInLastLine = timeObj.getHour();
+			minuteInLastLine = timeObj.getMinute();
+		}
+		catch (DateTimeException d) {
+			System.out.println("Error : " + e.getMessage());
+		}
+		/*
 		String separateT[] = lastLine.split("T");
 		String separateColon[] = separateT[1].split(":");
 		String strHour, strMinute = "0";
 		strHour = separateColon[0];
 		strMinute = separateColon[1];
-		// get ints from last line
+		// get ints from last line hour / minute
 		int hourInLastLine = 0;
 		int minuteInLastLine = 0;
 		try {
@@ -322,7 +340,8 @@ public class Project_main {
 		catch (NumberFormatException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		System.out.println("hour : " + hourInLastLine + " minute : " + minuteInLastLine);
+		System.out.println("hour : " + hourInLastLine + " minute : " + minuteInLastLine);// will delete
+*/
 		// get time now; add an hour
 		/*
 		int hourInLastLine, minuteInLastLine = 0;
