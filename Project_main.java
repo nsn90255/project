@@ -38,9 +38,9 @@ public class Project_main {
 			help();
 			return;
 		} else if ((args[0].equals("-u")) && (args.length < 2)) {
-			unblock(blocklist, args);
+			unblock(blocklist);
 		} else if ((args[0].equals("-b")) && (args.length < 2)) {
-			block(blocklist, args);
+			block(blocklist);
 		} else if (args[0].equals("-a")) {
 			addBannedDomain(blocklist, sc, args);
 		} else if (args[0].equals("-r")) {
@@ -50,13 +50,12 @@ public class Project_main {
 		} else if (args[0].equals("-v")) {
 			version();
 		} else if (args[0].equals("-i")) {
-			// for testing purposes
-			checkIfCanIgnore();
+			ignore(blocklist);
 		} else {
 			help();
 		}
 	}
-	public static void unblock(File blocklist, String args[]){
+	public static void unblock(File blocklist){
 		if (!checkBlocking()) {
 			System.out.println("Not blocking right now. Nothing to do.");
 			return;
@@ -67,7 +66,7 @@ public class Project_main {
 		backup.renameTo(hosts);
 		System.out.println("The blocklist is down.");
 	}
-	public static void block(File blocklist, String args[]){
+	public static void block(File blocklist){
 		// if already blocking stop
 		if (checkBlocking()) {
 			System.out.println("Already blocking.");
@@ -392,13 +391,13 @@ public class Project_main {
 			System.out.println("Error : " + e.getMessage());
 		}
 	}
-	public static void ignore() {
+	public static void ignore(File blocklist) {
 		if (checkIfCanIgnore()) {
 			writeLog();
-			unblock();
+			unblock(blocklist);
 			System.out.println("Successfully written to log and unblocked");
 		} else {
 			System.out.println("you cannot do that right now");
-		{
+		}
 	}
 }
