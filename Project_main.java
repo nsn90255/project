@@ -316,16 +316,15 @@ public class Project_main {
 		try {
 			LocalDateTime timeObj = LocalDateTime.parse(separateDate[1]);
 			yearInLastLine = timeObj.getYear();
-			monthInLastLine = timeObj.getHour();
-			dayOfMonthInLastLine = timeObj.getMonthValue();
+			monthInLastLine = timeObj.getMonthValue();
+			dayOfMonthInLastLine = timeObj.getDayOfMonth();
 			hourInLastLine = timeObj.getHour();
 			minuteInLastLine = timeObj.getMinute();
 		}
 		catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
 		}
-		// get month by parsing the string
-
+		System.out.println(yearInLastLine + " " + monthInLastLine + " " + dayOfMonthInLastLine + " " + hourInLastLine + " " + minuteInLastLine);
 
 
 
