@@ -292,9 +292,8 @@ public class Project_main {
 		System.out.println("Project ALPHA 1.0");
 	}
 	public static boolean checkIfCanIgnore() {
-		String lastLine = null;
-		int hourInLastLine, minuteInLastLine = 0;
 		// get last line from log; store in lastLine
+		String lastLine = null;
 		try {
 			File log = new File("blockdaemon.log");
 			BufferedReader br = new BufferedReader(new FileReader(log));
@@ -307,20 +306,37 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
+		// parse string, get hour and minute
+		String separateT[] = lastLine.split("T");
+		String separateColon[] = separateT[1].split(":");
+		String strHour, strMinute = "0";
+		strHour = separateColon[0];
+		strMinute = separateColon[1];
+		// get ints from last line
+		int hourInLastLine = 0;
+		int minuteInLastLine = 0;
+		try {
+			hourInLastLine = Integer.parseInt(strHour);
+			minuteInLastLine = Integer.parseInt(strMinute);
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Error : " + e.getMessage());
+		}
+		System.out.println("hour : " + hourInLastLine + " minute : " + minuteInLastLine);
 		// get time now; add an hour
+		/*
+		int hourInLastLine, minuteInLastLine = 0;
 		try {
 			LocalDateTime now = LocalDateTime.now();
 			LocalDateTime datePlusOneHour = now.plusHours(1);
 			System.out.println("time + 1h : " + datePlusOneHour);// will remove later
 			hourInLastLine = datePlusOneHour.getHour();
 			minuteInLastLine = datePlusOneHour.getMinute();
-			System.out.println("int : " + hourInLastLine + "\nminute : " + minuteInLastLine);
+			System.out.println("int : " + hourInLastLine + "\nminute : " + minuteInLastLine);// will remove later
 		} catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
 		}
-		// TODO:check here	
-		System.out.println("last line : " + lastLine);// will remove later
-		// for now
+		*/
 		return false;
 	}
 	public static void writeLog() {
