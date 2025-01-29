@@ -314,7 +314,6 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		//LocalDateTime dateRightNow = LocalDateTime.now();
 		try {
 			LocalDateTime now = LocalDateTime.now();
 			LocalDateTime datePlusOneHour = now.plusHours(1);
