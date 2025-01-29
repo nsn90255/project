@@ -317,13 +317,18 @@ public class Project_main {
 			LocalDateTime timeObj = LocalDateTime.parse(separateDate[1]);
 			yearInLastLine = timeObj.getYear();
 			monthInLastLine = timeObj.getHour();
-			dayOfMonthInLastLine = timeObj.getMonth();
+			dayOfMonthInLastLine = timeObj.getMonthValue();
 			hourInLastLine = timeObj.getHour();
 			minuteInLastLine = timeObj.getMinute();
 		}
 		catch (DateTimeException d) {
-			System.out.println("Error : " + e.getMessage());
+			System.out.println("Error : " + d.getMessage());
 		}
+		// get month by parsing the string
+
+
+
+
 		/*
 		String separateT[] = lastLine.split("T");
 		String separateColon[] = separateT[1].split(":");
