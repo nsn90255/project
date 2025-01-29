@@ -324,10 +324,16 @@ public class Project_main {
 		catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
 		}
-		System.out.println(yearInLastLine + " " + monthInLastLine + " " + dayOfMonthInLastLine + " " + hourInLastLine + " " + minuteInLastLine);
-
-
-
+		// compare
+		System.out.println(yearInLastLine + " " + monthInLastLine + " " + dayOfMonthInLastLine + " " + hourInLastLine + " " + minuteInLastLine);// will delete
+		try {
+			LocalDateTime timeNow = LocalDateTime.now();
+			if (dayOfMonthInLastLine < timeNow.getDayOfMonth()) {
+				System.out.println("can ignore");
+			}
+		} catch (DateTimeException d) {
+			System.out.println("Error : " + d.getMessage());
+		}
 		/*
 		String separateT[] = lastLine.split("T");
 		String separateColon[] = separateT[1].split(":");
