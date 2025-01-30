@@ -57,12 +57,14 @@ public class Project_main {
 		}
 	}
 	public static void unblock(File blocklist){
+		// if not blocking do nothing
 		if (!checkBlocking()) {
 			System.out.println("Not blocking right now. Nothing to do.");
 			return;
 		}
 		File hosts = new File("/etc/hosts");
 		File backup = new File("/etc/hosts.bkp");
+		// replace hosts file with backup of the original one
 		hosts.delete();
 		backup.renameTo(hosts);
 		System.out.println("The blocklist is down.");
@@ -238,6 +240,7 @@ public class Project_main {
 		}
 	}
 	public static boolean checkBlocking() {
+		// check if a backup of the original hosts file exists (this should only be the case if it's blocking)
 		File doesBackupExist = new File("/etc/hosts.bkp");
 		if (doesBackupExist.exists()) {
 			return true;
@@ -255,8 +258,8 @@ public class Project_main {
 		System.out.println("  -v\t\t\t\tPrint version information.");
 	}
 	public static void createBlocklist() {
+		// create the blocklist
 		try {
-			// create the blocklist
 			File blocklist = new File("/etc/blocklist.conf");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist));
 			wr.write("# write your days to block here\n");
@@ -282,6 +285,7 @@ public class Project_main {
 		return;
 	}
 	public static void checkStatus() {
+		// print the status
 		String not = "";
 		if (!checkBlocking()) {
 			not = "Not ";
@@ -289,6 +293,7 @@ public class Project_main {
 		System.out.println("Status : [" + not + "Blocking]");
 	}
 	public static void version() {
+		// print the version
 		System.out.println("Project ALPHA 1.0");
 	}
 	public static boolean checkIfCanIgnore() {
