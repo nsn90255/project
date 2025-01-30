@@ -23,6 +23,7 @@ import java.io.IOException;
 //import java.time.LocalDateTime;
 //import java.time.format.DateTimeFormatter;
 //import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.time.*;
 
 public class Project_main {
@@ -305,8 +306,22 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
-		// extract time string from last line and asign int variables
+		// extract time string from last line
 		String separateDate[] = lastLine.split(" @ ");
+		boolean returnTrue = false;
+		// check if more than 24h
+		try {
+			LocalDateTime lastLog = LocalDateTime.parse(separateDate[1]);
+			LocalDateTime timeNow = LocalDateTime.now();
+			Duration duration = Duration.between(lastLog, timeNow);
+			if (duration.toMinutes() > 1440) {
+				returnTrue = true;
+			}
+		} catch (DateTimeParseException e) {
+			System.out.println("Error : " + e.getMessage());
+			return false;
+		}
+		/*
 		int yearInLastLine = 0;
 		int monthInLastLine = 0;
 		int dayOfMonthInLastLine = 0;
@@ -323,9 +338,11 @@ public class Project_main {
 		catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
 		}
+		*/
 		// compare
-		System.out.println(yearInLastLine + " " + monthInLastLine + " " + dayOfMonthInLastLine + " " + hourInLastLine + " " + minuteInLastLine);// will delete
-		boolean returnTrue = false;
+		// System.out.println(yearInLastLine + " " + monthInLastLine + " " + dayOfMonthInLastLine + " " + hourInLastLine + " " + minuteInLastLine);// will delete
+		//boolean returnTrue = false;
+		/*
 		try {
 			LocalDateTime timeNow = LocalDateTime.now();
 			if ((timeNow.getYear() - yearInLastLine) > 0) {
@@ -339,10 +356,15 @@ public class Project_main {
 			} else {
 				System.out.println("you cannot ignore rn");
 			}
+			
+			int minutesSinceBlock = 0;
+			minutesSinceBlock = (timeNow.getYear()*525600 + timeNow.getMonthValue()*43800 + timeNow.getDayOfMonth()*1440 + timeNow.getHour()*60 + timeNow.getMinute()) - (yearInLastLine*525600 + monthInLastLine*43800 + dayOfMonthInLastLine*1440 + hourInLastLine*60 + minuteInLastLine);
+			if (minutesSinceBlock > 1440) {
+				returnTrue = true;
+			}
 		} catch (DateTimeException d) {
 			System.out.println("Error : " + d.getMessage());
 		}
-		/*
 		String separateT[] = lastLine.split("T");
 		String separateColon[] = separateT[1].split(":");
 		String strHour, strMinute = "0";
