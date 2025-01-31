@@ -341,6 +341,10 @@ public class Project_main {
 		}
 	}
 	public static void ignore(File blocklist) {
+		if (!checkBlocking()) {
+			System.out.println("Not blocking right now. Nothing to do.");
+			return;
+		}
 		if (checkIfCanIgnore()) {
 			writeLog();
 			unblock(blocklist);
