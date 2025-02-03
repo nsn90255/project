@@ -1,13 +1,12 @@
 #!/bin/sh
 set -e
 if which systemctl &> /dev/null;then
-	cp service_files/systemd/project.service /etc/systemd/system/project.service
-	cp block_daemon.sh /usr/local/bin/block_daemon.sh
+	install -m 755 service_files/systemd/project.service /etc/systemd/system/project.service
+	install -m 755 block_daemon.sh /usr/local/bin/block_daemon.sh
 	systemctl enable project
 elif which rc-status &> /dev/null;then
-	cp service_files/openrc/project /etc/init.d/project
-	cp block_daemon.sh /usr/local/bin/block_daemon.sh
-	chmod 755 /etc/init.d/project
+	install -m 755 service_files/openrc/project /etc/init.d/project
+	install -m 755 block_daemon.sh /usr/local/bin/block_daemon.sh
 	rc-update add project default
 else
 	echo "This program only supports systemd and openrc"
@@ -28,8 +27,7 @@ mkdir build
 javac -d build/ Project_main.java
 cd build
 jar cfm Project_main.jar ../MANIFEST.MF Project_main.class
-cp Project_main.jar /usr/local/bin/project.jar
-chmod 744 /usr/local/bin/project.jar
+install -m 744 Project_main.jar /usr/local/bin/project.jar
 echo '#!/bin/sh' > /usr/local/bin/project
 echo 'java -jar /usr/local/bin/project.jar "$@"' >> /usr/local/bin/project
 cd ../
