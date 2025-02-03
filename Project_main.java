@@ -253,6 +253,7 @@ public class Project_main {
 		System.out.println("  -r\t\t\t\tRemove a blocked domain.");
 		System.out.println("  -s\t\t\t\tCheck if running or not.");
 		System.out.println("  -v\t\t\t\tPrint version information.");
+		System.out.println("  -i\t\t\t\tIgnore blocking.");
 	}
 	public static void createBlocklist() {
 		// create the blocklist
