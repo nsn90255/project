@@ -10,7 +10,8 @@ do
 	second_time=$(echo "$extract_after_day" | awk -F '-' '{print $2}')
 	third_time=$(echo "$extract_after_day" | awk -F '-' '{print $3}')
 	fourth_time=$(echo "$extract_after_day" | awk -F '-' '{print $4}')
-	# check ignore at /etc/blocklist to see it should ignore it
+	# check log to see if it should block
+	# if log+1h > time sleep until log+1h
 	#if [ "$ignore" = "true" ]; then
 		#echo ignoring	
 		#echo "Ignoring at $(date) until #$(date +%m.%e.)$(echo "$(date +%H)+1" | bc).$(date +%M)" >> /var/log/blockdeamon.log
