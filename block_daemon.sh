@@ -2,7 +2,7 @@
 while :
 do
 	ignore=$(grep ignore /etc/blocklist.conf | awk -F '=' '{print $2}') 
-	lastblock=$(tail -1 /home/normal-user/project/blockdeamon.log)
+	lastblock=$(tail -1 /var/log/blockdaemon.log)
 	day=$(date +%u)
 	hourminute=$(date +%H%M)
 	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
