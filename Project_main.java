@@ -298,7 +298,7 @@ public class Project_main {
 		// get last line from log; store in lastLine
 		String lastLine = null;
 		try {
-			File log = new File("blockdaemon.log");
+			File log = new File("/var/log/blockdaemon.log");
 			BufferedReader br = new BufferedReader(new FileReader(log));
 			String lineRead = null, tmp;
 			while ((tmp = br.readLine()) != null) {
