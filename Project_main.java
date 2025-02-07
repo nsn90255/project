@@ -309,6 +309,10 @@ public class Project_main {
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
 		}
+		// if the log is empty, allow
+		if (lastLine == null) {
+			return true;
+		}
 		// extract time string from last line
 		String separateDate[] = lastLine.split(" @ ");
 		boolean returnTrue = false;
@@ -333,7 +337,7 @@ public class Project_main {
 	public static void writeLog() {
 		LocalDateTime dateRightNow = LocalDateTime.now();
 		try {
-			File log = new File("blockdaemon.log");
+			File log = new File("/var/log/blockdaemon.log");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(log, true));
 			wr.write("Ignoring @ " + dateRightNow + "\n");
 			wr.close();
