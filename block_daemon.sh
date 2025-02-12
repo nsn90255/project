@@ -1,23 +1,31 @@
 #!/bin/sh
 while :
 do
-	ignore=$(grep ignore /etc/blocklist.conf | awk -F '=' '{print $2}') 
-	lastblock=$(tail -1 /var/log/blockdaemon.log)
+	# time in hour and  minutes of last block
+	lastBlockHour=$(tail -1 /var/log/blockdaemon.log | awk -F 'T' '{print $2}' | awk -F ':' '{print $1}')
+	lastBlockMinute=$(tail -1 /var/log/blockdaemon.log | awk -F 'T' '{print $2}' | awk -F ':' '{print $2}')
+	# get day of the week in numerical form
 	day=$(date +%u)
-	hourminute=$(date +%H%M)
+	# get hour and minute from the system
+	hour=$(date +%H)
+	minute=$(date +%M)
+	hourminute="$hour$minute"
+	# get blocking ranges from /etc/blocklist
 	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
 	first_time=$(echo "$extract_after_day" | awk -F '-' '{print $1}')
 	second_time=$(echo "$extract_after_day" | awk -F '-' '{print $2}')
 	third_time=$(echo "$extract_after_day" | awk -F '-' '{print $3}')
 	fourth_time=$(echo "$extract_after_day" | awk -F '-' '{print $4}')
-	# check log to see if it should block
-	# if log+1h > time sleep until log+1h
-	#if [ "$ignore" = "true" ]; then
-		#echo ignoring	
-		#echo "Ignoring at $(date) until #$(date +%m.%e.)$(echo "$(date +%H)+1" | bc).$(date +%M)" >> /var/log/blockdeamon.log
-		#$(project -u > /dev/null)
-		#sleep 3600
-	#fi
+	# make check for empty log at some point
+	# check log to see if it should ignore (works for the same day for now)
+	if [ "$(echo "$hour - $lastBlockHour" | bc)" = 0 ];then
+		minuteDifference="$(echo "$minute - $lastBlockMinute" | bc)"
+		echo minute $minute
+		echo lastBlockMinute $lastBlockMinute
+		echo minuteDifference $minuteDifference
+	else
+		echo not so sure
+	fi
 	# check the config at /etc/blocklist.conf to see if it's okay to block
 	if [ "$extract_after_day" = "all" ];then
 		echo first if
