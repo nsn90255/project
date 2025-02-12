@@ -334,15 +334,22 @@ public class Project_main {
 			return false;
 		}
 	}
-	public static void writeLog() {
+	public static boolean writeLog() {
 		LocalDateTime dateRightNow = LocalDateTime.now();
+		boolean returnTrue = false;
 		try {
 			File log = new File("/var/log/blockdaemon.log");
 			BufferedWriter wr = new BufferedWriter(new FileWriter(log, true));
 			wr.write("Ignoring @ " + dateRightNow + "\n");
 			wr.close();
+			returnTrue = true;
 		} catch (IOException e) {
 			System.out.println("Error : " + e.getMessage());
+		}
+		if (returnTrue) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 	public static void ignore(File blocklist) {
@@ -350,8 +357,7 @@ public class Project_main {
 			System.out.println("Not blocking right now. Nothing to do.");
 			return;
 		}
-		if (checkIfCanIgnore()) {
-			writeLog();
+		if (checkIfCanIgnore() && writeLog()) {
 			unblock(blocklist);
 			System.out.println("Successfully written to log and unblocked");
 		} else {
