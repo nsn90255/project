@@ -20,7 +20,6 @@ do
 	# check log to see if it should ignore (assume it's the same day)
 	if [ "$(echo "$hourRightNow - $lastBlockHour" | bc)" = 0 ];then
 		howManyMinutes="$(echo "$minuteRightNow - $lastBlockMinute" | bc)"
-		#howManyMinutes2="$(echo "60 - $howManyMinutes" | bc)"
 		howManyMinutesInSeconds="$(echo "$howManyMinutes*60" | bc)"
 		sleepFor="$(echo "3600 - $howManyMinutesInSeconds" | bc)"
 		echo sleepFor $sleepFor
