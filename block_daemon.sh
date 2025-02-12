@@ -19,10 +19,12 @@ do
 	# make check for empty log at some point
 	# check log to see if it should ignore (works for the same day for now)
 	if [ "$(echo "$hour - $lastBlockHour" | bc)" = 0 ];then
-		minuteDifference="$(echo "$minute - $lastBlockMinute" | bc)"
+		howManyMinutes="$(echo "$minute - $lastBlockMinute" | bc)"
+		howManyMinutesInSeconds="$(echo "$howManyMinutes*60" | bc)"
+		sleepFor="$(echo "3600 - $howManyMinutesInSeconds" | bc)"
 		echo minute $minute
 		echo lastBlockMinute $lastBlockMinute
-		echo minuteDifference $minuteDifference
+		echo sleepFor $sleepFor
 	else
 		echo not so sure
 	fi
