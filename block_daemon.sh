@@ -7,9 +7,9 @@ do
 	# get day of the week in numerical form
 	day=$(date +%u)
 	# get hour and minute from the system
-	hour=$(date +%H)
-	minute=$(date +%M)
-	hourminute="$hour$minute"
+	hourRightNow=$(date +%H)
+	minuteRightNow=$(date +%M)
+	hourminuteRightNow="$hourRightNow$minuteRightNow"
 	# get blocking ranges from /etc/blocklist
 	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
 	first_time=$(echo "$extract_after_day" | awk -F '-' '{print $1}')
@@ -18,15 +18,16 @@ do
 	fourth_time=$(echo "$extract_after_day" | awk -F '-' '{print $4}')
 	# make check for empty log at some point
 	# check log to see if it should ignore (assume it's the same day)
-	if [ "$(echo "$hour - $lastBlockHour" | bc)" = 0 ];then
-		howManyMinutes="$(echo "$minute - $lastBlockMinute" | bc)"
-		howManyMinutes2="$(echo "60 - $howManyMinutes" | bc)"
-		howManyMinutesInSeconds="$(echo "$howManyMinutes2*60" | bc)"
+	if [ "$(echo "$hourRightNow - $lastBlockHour" | bc)" = 0 ];then
+		howManyMinutes="$(echo "$minuteRightNow - $lastBlockMinute" | bc)"
+		#howManyMinutes2="$(echo "60 - $howManyMinutes" | bc)"
+		howManyMinutesInSeconds="$(echo "$howManyMinutes*60" | bc)"
 		sleepFor="$(echo "3600 - $howManyMinutesInSeconds" | bc)"
 		echo sleepFor $sleepFor
-	elif [ "$(echo "$hour - $lastBlockHour" | bc)" = 1 ];then
+		sleep $sleepFor
+	elif [ "$(echo "$hourRightNow - $lastBlockHour" | bc)" = 1 ];then
 		minutesToNextHour="$(echo "60 - $lastBlockMinute" | bc)"
-		minutesDifference="$(echo "$minutesToNextHour + $minute" | bc)"
+		minutesDifference="$(echo "$minutesToNextHour + $minuteRightNow" | bc)"
 		echo minutesDifference $minutesDifference 
 	else
 		echo not so sure
