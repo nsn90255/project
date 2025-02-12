@@ -29,7 +29,9 @@ do
 		minutesDifference="$(echo "$minutesToNextHour + $minuteRightNow" | bc)"
 		minutesDifferenceInSeconds="$(echo "$minutesDifference*60" | bc)"
 		sleepFor="$(echo "3600 - $minutesDifferenceInSeconds" | bc)"
-		echo minutesDifference $minutesDifference 
+		#echo minutesDifference $minutesDifference 
+		echo sleepFor $sleepFor
+		sleep $sleepFor
 	else
 		echo not so sure
 	fi
