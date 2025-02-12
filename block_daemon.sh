@@ -27,11 +27,13 @@ do
 	elif [ "$(echo "$hourRightNow - $lastBlockHour" | bc)" = 1 ];then
 		minutesToNextHour="$(echo "60 - $lastBlockMinute" | bc)"
 		minutesDifference="$(echo "$minutesToNextHour + $minuteRightNow" | bc)"
+		minutesDifferenceInSeconds="$(echo "$minutesDifference*60" | bc)"
+		sleepFor="$(echo "3600 - $minutesDifferenceInSeconds" | bc)"
 		echo minutesDifference $minutesDifference 
 	else
 		echo not so sure
 	fi
-	echo minute $minute
+	echo minuteRightNow $minuteRightNow
 	echo lastBlockMinute $lastBlockMinute
 	echo sleepFor $sleepFor
 	# check the config at /etc/blocklist.conf to see if it's okay to block
