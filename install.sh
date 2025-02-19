@@ -22,6 +22,7 @@ fi
 if ! [ -d /var/lib/project ]; then
 	mkdir /var/lib/project
 fi
+cp defaults.conf /var/lib/project/defaults.conf
 cp man_pages/blocklist.conf.5 /usr/local/man/man5/blocklist.conf.5
 if [ -d build ]; then
 	rm -r build
