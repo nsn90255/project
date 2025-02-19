@@ -19,6 +19,9 @@ cp man_pages/project.8 /usr/local/man/man8/project.8
 if ! [ -d /usr/local/man/man5 ]; then
 	mkdir /usr/local/man/man5
 fi
+if ! [ -d /var/lib/project ]; then
+	mkdir /var/lib/project
+fi
 cp man_pages/blocklist.conf.5 /usr/local/man/man5/blocklist.conf.5
 if [ -d build ]; then
 	rm -r build
