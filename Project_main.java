@@ -167,8 +167,7 @@ public class Project_main {
 						break;
 					}
 				}
-				if (write == true) {
-					// add code here
+				if (write) {
 					wr.write(toBlock + "\n");
 					System.out.println(toBlock + " has been added to the blocklist.");
 				} else {
