@@ -228,7 +228,6 @@ public class Project_main {
 			Path blocklistPath = Paths.get("/etc/blocklist.conf");
 			Path tempFilePath = Paths.get("/tmp/blocklist.tmp");
 			if (domainRemoved) {
-				blocklist.delete();
 				Files.copy(tempFilePath, blocklistPath, StandardCopyOption.REPLACE_EXISTING);
 				System.out.println("Blocklist updated");
 			} else {
