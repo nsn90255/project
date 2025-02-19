@@ -53,8 +53,8 @@ public class Project_main {
 			version();
 		} else if (args[0].equals("-i")) {
 			ignore(blocklist);
-		} else if (args[0].equals("-t")) {
-			test(blocklist);
+		} else if (args[0].equals("-d")) {
+			copyDefaults(blocklist);
 		} else {
 			help();
 		}
@@ -369,7 +369,7 @@ public class Project_main {
 			System.out.println("you cannot do that right now");
 		}
 	}
-	public static void test(File blocklist) {
+	public static void copyDefaults(File blocklist) {
 		// file with defaults to be copied over
 		File defaults = new File("/var/lib/project/defaults.conf");
 		try{
