@@ -53,6 +53,8 @@ public class Project_main {
 			version();
 		} else if (args[0].equals("-i")) {
 			ignore(blocklist);
+		} else if (args[0].equals("-t")) {
+			test(blocklist);
 		} else {
 			help();
 		}
@@ -367,7 +369,64 @@ public class Project_main {
 			System.out.println("you cannot do that right now");
 		}
 	}
-	public static void addDefaults(File blocklist) {
+	public static void test(File blocklist) {
+		// file with defaults to be copied over
 		File defaults = new File("/var/lib/project/defaults.conf");
+		try{
+			BufferedWriter wr = new BufferedWriter(new FileWriter(blocklist, true));
+			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
+			BufferedReader rddef = new BufferedReader(new FileReader(defaults));
+			// number of line in defaults to be used to create array
+			int numberOfLinesInDefaults = 0;
+			String defaultsLine;
+			while ((defaultsLine = rddef.readLine()) != null) {
+				numberOfLinesInDefaults++;
+			}
+			// reset reader
+			rddef.close();
+			BufferedReader rddef2 = new BufferedReader(new FileReader(defaults));
+			// array to store the extracted lines
+			String[] defaultDomainsToAdd = new String[numberOfLinesInDefaults];
+			// line read from defaults to be stored in the array
+			int lineToAdd = 0;
+			while ((defaultsLine = rddef2.readLine()) != null) {
+				// remove whitespaces
+				String trimmedDefaults = defaultsLine.trim();
+				// create a new array element with each new line
+				defaultDomainsToAdd[lineToAdd] = trimmedDefaults;
+				lineToAdd++;
+			}
+			// loop through every array item
+			for (int i = 0; i < defaultDomainsToAdd.length; i++){
+				// assign the argument to toBlock
+				String toBlock = defaultDomainsToAdd[i];
+				// controls whether to write or not
+				boolean write = true;
+				String currentLine;
+				// check if each line in the blocklist equals the array item
+				while ((currentLine = rd.readLine()) != null) {
+					// remove whitespaces
+					String trimmedLine = currentLine.trim();
+					// if it does equal the item, flag it and stop the loop there
+					if (trimmedLine.equals(defaultDomainsToAdd[i])) {
+						write = false;
+						break;
+					}
+				}
+				// if we can write the array item, we do so
+				if (write) {
+					// add code here
+					wr.write(toBlock + "\n");
+					System.out.println(toBlock + " has been added to the blocklist.");
+				} else {
+					System.out.println(toBlock + " is already in the blocklist.");
+				}
+			}
+			wr.close();
+			rd.close();
+			rddef2.close();
+		} catch (IOException e){
+			System.out.println("Error : " + e.getMessage());
+		}
 	}
 }
