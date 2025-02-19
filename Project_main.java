@@ -25,6 +25,7 @@ import java.io.IOException;
 //import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
 import java.time.*;
+import java.nio.file.*;
 
 public class Project_main {
     
@@ -190,7 +191,7 @@ public class Project_main {
 			return;
 		}
 		try{
-			File tempFile = new File("/tmp/blocklist.temp");
+			File tempFile = new File("/tmp/blocklist.tmp");
 			BufferedReader rd = new BufferedReader(new FileReader(blocklist));
 			BufferedWriter wr = new BufferedWriter(new FileWriter(tempFile));
 			boolean domainRemoved = false;
@@ -205,7 +206,7 @@ public class Project_main {
 				// loop through every argument and check if they match the current line
 				for (int i = 1;	i < args.length; i++) {
 					// give the value of the argument to the string toUnblock
-					String toUnblock = args[i].trim();
+					String toUnblock = args[i].trim();// ;
 					// if the line without the whitespace is the same as the argument
 					if (trimmedLine.equals(toUnblock)) {
 						System.out.println(toUnblock + " has been removed from the blocklist.");
@@ -223,9 +224,12 @@ public class Project_main {
 			}
 			wr.close();
 			rd.close();
-			// rename the temp file to blocklist.txt if one domain or more is written
+			// rename the temp file to blocklist if one domain or more is written
+			Path blocklistPath = Paths.get("/etc/blocklist.conf");
+			Path tempFilePath = Paths.get("/tmp/blocklist.tmp");
 			if (domainRemoved) {
-				tempFile.renameTo(blocklist);
+				blocklist.delete();
+				Files.copy(tempFilePath, blocklistPath, StandardCopyOption.REPLACE_EXISTING);
 				System.out.println("Blocklist updated");
 			} else {
 			    // If no domain was removed, delete the temp file
@@ -363,5 +367,8 @@ public class Project_main {
 		} else {
 			System.out.println("you cannot do that right now");
 		}
+	}
+	public static void addDefaults(File blocklist) {
+		File defaults = new File("/var/lib/project/defaults.conf");
 	}
 }
