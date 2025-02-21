@@ -52,6 +52,8 @@ public class Project_main {
 			ignore(blocklist);
 		} else if (args[0].equals("-d")) {
 			copyDefaults(blocklist);
+		} else if (args[0].equals("-t")) {
+			test();
 		} else {
 			help();
 		}
@@ -424,5 +426,7 @@ public class Project_main {
 		} catch (IOException e){
 			System.out.println("Error : " + e.getMessage());
 		}
+	}
+	public static void test() {
 	}
 }
