@@ -1,5 +1,9 @@
 #!/bin/sh
 set -e
+if ! [ "$(id -u)" -eq 0 ]; then
+	echo -e "\033[1;31mrun as root.\033[0m"
+	exit 1
+fi
 if which systemctl &> /dev/null;then
 	install -m 755 service_files/systemd/project.service /etc/systemd/system/project.service
 	install -m 755 block_daemon.sh /usr/local/bin/block_daemon.sh
