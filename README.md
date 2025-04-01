@@ -1,3 +1,4 @@
+# Domain Blocker Tool
 # Install
 Run the install script as root **in the main project directory**.
 ```
