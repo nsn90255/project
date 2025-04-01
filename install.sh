@@ -34,7 +34,7 @@ fi
 mkdir build
 javac -d build/ Project_main.java
 cd build
-jar cfm Project_main.jar ../MANIFEST.MF Project_main.class
+jar cfm Project_main.jar ../MANIFEST.MF Project_main*.class
 install -m 744 Project_main.jar /usr/local/bin/project.jar
 echo '#!/bin/sh' > /usr/local/bin/project
 echo 'java -jar /usr/local/bin/project.jar "$@"' >> /usr/local/bin/project

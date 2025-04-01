@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.time.*;
 import java.nio.file.*;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Project_main {
     
@@ -53,7 +56,7 @@ public class Project_main {
 		} else if (args[0].equals("-d")) {
 			copyDefaults(blocklist);
 		} else if (args[0].equals("-t")) {
-			test();
+			test(blocklist);
 		} else {
 			help();
 		}
@@ -427,6 +430,30 @@ public class Project_main {
 			System.out.println("Error : " + e.getMessage());
 		}
 	}
-	public static void test() {
-	}
+	public static void test(File blocklist) {
+        // Create a JFrame (the main window)
+        JFrame frame = new JFrame("Button Click Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+
+        // Create a JButton
+        JButton button = new JButton("Click Me!");
+
+        // Add an ActionListener to the button
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Call the ignore() method when the button is clicked
+                ignore(blocklist);
+            }
+        });
+
+        // Add the button to the frame
+        frame.getContentPane().add(button);
+
+        // Set the frame visible
+        frame.setVisible(true);
+    }
+
+
 }
