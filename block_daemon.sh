@@ -14,8 +14,6 @@ do
 	extract_after_day=$(grep "^$day=" /etc/blocklist.conf | awk -F '=' '{print $2}')
 	first_time=$(echo "$extract_after_day" | awk -F '-' '{print $1}')
 	second_time=$(echo "$extract_after_day" | awk -F '-' '{print $2}')
-	third_time=$(echo "$extract_after_day" | awk -F '-' '{print $3}')
-	fourth_time=$(echo "$extract_after_day" | awk -F '-' '{print $4}')
 	# make check for empty log at some point
 	# check log to see if it should ignore (assume it's the same day)
 	if [ "$(echo "$hourRightNow - $lastBlockHour" | bc)" = 0 ];then
@@ -44,9 +42,6 @@ do
 		$(project -b > /dev/null)
 	elif [ "$first_time" -le "$hourminute" ] && [ "$second_time" -ge "$hourminute" ]; then
 		echo second if
-		$(project -b > /dev/null)
-	elif [ "$third_time" -le "$hourminute" ] && [ "$fourth_time" -ge "$hourminute" ]; then
-		echo third if
 		$(project -b > /dev/null)
 	else 
 		echo else
