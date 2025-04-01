@@ -37,6 +37,7 @@ public class BlockDaemon {
                             ignoreTime.plusHours(1).format(DateTimeFormatter.ISO_LOCAL_TIME) + ")");
                     System.out.println("Running: sudo project -u");
 		    Process unblockProcess = unblockCommand.start();
+		    unblockProcess.waitFor();
                     return; // We will unblock and exit the program
                 }
             }
@@ -49,6 +50,7 @@ public class BlockDaemon {
             if (blockSetting.equals("all") || blockSetting.equals("0000-0000")) {
                 System.out.println("Running: sudo project -b");
 		Process blockProcess = blockCommand.start();
+		blockProcess.waitFor();
             } else {
                 System.out.println("No blocking required.");
             }
