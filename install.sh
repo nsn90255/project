@@ -6,11 +6,11 @@ if ! [ "$(id -u)" -eq 0 ]; then
 fi
 if which systemctl &> /dev/null;then
 	install -m 755 service_files/systemd/project.service /etc/systemd/system/project.service
-	install -m 755 block_daemon.sh /usr/local/bin/block_daemon.sh
+	install -m 755 daemon/block_daemon.sh /usr/local/bin/block_daemon.sh
 	systemctl enable project
 elif which rc-status &> /dev/null;then
 	install -m 755 service_files/openrc/project /etc/init.d/project
-	install -m 755 block_daemon.sh /usr/local/bin/block_daemon.sh
+	install -m 755 daemon/block_daemon.sh /usr/local/bin/block_daemon.sh
 	rc-update add project default
 else
 	echo "This program only supports systemd and openrc"
@@ -36,6 +36,12 @@ javac -d build/ Project_main.java
 cd build
 jar cfm Project_main.jar ../MANIFEST.MF Project_main*.class
 install -m 744 Project_main.jar /usr/local/bin/project.jar
+cd ..
+rm build/*
+javac -d build/ daemon/BlockDaemon.java
+cd build
+jar cfm BlockDaemon.jar ../daemon/MANIFEST.MF BlockDaemon.class
+install -m 744 BlockDaemon.jar /usr/local/bin/blockdaemon.jar
 echo '#!/bin/sh' > /usr/local/bin/project
 echo 'java -jar /usr/local/bin/project.jar "$@"' >> /usr/local/bin/project
 cd ../
