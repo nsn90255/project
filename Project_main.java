@@ -432,12 +432,12 @@ public class Project_main {
 	}
 	public static void test(File blocklist) {
         // Create a JFrame (the main window)
-        JFrame frame = new JFrame("Button Click Example");
+        JFrame frame = new JFrame("Pause button");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
+        frame.setSize(600, 400);
 
         // Create a JButton
-        JButton button = new JButton("Click Me!");
+        JButton button = new JButton("Click To Pause Website Blockling for 1 hour.(Once per day.)");
 
         // Add an ActionListener to the button
         button.addActionListener(new ActionListener() {
