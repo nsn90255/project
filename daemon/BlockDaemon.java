@@ -13,6 +13,13 @@ public class BlockDaemon {
     private static final String LOG_FILE = "/var/log/blockdaemon.log";
 
     public static void main(String[] args) {
+	String block = "sudo project -b";
+	String unblock = "sudo project -u";
+	ProcessBuilder blockCommand = new ProcessBuilder();
+        blockCommand.command("bash", "-c", block);
+	ProcessBuilder unblockCommand = new ProcessBuilder();
+        unblockCommand.command("bash", "-c", unblock);
+
         try {
             // Step 1: Read the configuration file
             Map<Integer, String> blockDays = readBlocklistConfig();
@@ -29,6 +36,7 @@ public class BlockDaemon {
                     System.out.println("Unblock for the remainder of the time (until " +
                             ignoreTime.plusHours(1).format(DateTimeFormatter.ISO_LOCAL_TIME) + ")");
                     System.out.println("Running: sudo project -u");
+		    Process unblockProcess = unblockCommand.start();
                     return; // We will unblock and exit the program
                 }
             }
@@ -40,6 +48,7 @@ public class BlockDaemon {
             // Check if it's a "block" day and run the block command
             if (blockSetting.equals("all") || blockSetting.equals("0000-0000")) {
                 System.out.println("Running: sudo project -b");
+		Process blockProcess = blockCommand.start();
             } else {
                 System.out.println("No blocking required.");
             }
