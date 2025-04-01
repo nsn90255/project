@@ -55,8 +55,8 @@ public class BlockDaemon {
                 System.out.println("No blocking required.");
             }
 
-        } catch (IOException e) {
-            System.err.println("Error reading files: " + e.getMessage());
+        } catch (Throwable t) {
+            System.err.println("Error reading files: " + t.getMessage());
         }
     }
 
