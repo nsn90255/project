@@ -55,8 +55,8 @@ public class Project_main {
 			ignore(blocklist);
 		} else if (args[0].equals("-d")) {
 			copyDefaults(blocklist);
-		} else if (args[0].equals("-t")) {
-			test(blocklist);
+		} else if (args[0].equals("-g")) {
+			graphical(blocklist);
 		} else {
 			help();
 		}
@@ -430,7 +430,7 @@ public class Project_main {
 			System.out.println("Error : " + e.getMessage());
 		}
 	}
-	public static void test(File blocklist) {
+	public static void graphical(File blocklist) {
         // Create a JFrame (the main window)
         JFrame frame = new JFrame("Pause button");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
