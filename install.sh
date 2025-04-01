@@ -42,8 +42,8 @@ javac -d build/ daemon/BlockDaemon.java
 cd build
 jar cfm BlockDaemon.jar ../daemon/MANIFEST.MF BlockDaemon.class
 install -m 744 BlockDaemon.jar /usr/local/bin/blockdaemon.jar
-cp dbt /usr/local/bin/dbt
 cd ../
+cp dbt /usr/local/bin/dbt
 touch /var/log/blockdaemon.log
 chown root:root /var/log/blockdaemon.log
 chmod 644 /var/log/blockdaemon.log
