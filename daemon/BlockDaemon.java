@@ -13,8 +13,8 @@ public class BlockDaemon {
     private static final String LOG_FILE = "/var/log/blockdaemon.log";
 
     public static void main(String[] args) {
-	String block = "sudo project -b";
-	String unblock = "sudo project -u";
+	String block = "sudo dbt -b";
+	String unblock = "sudo dbt -u";
 	ProcessBuilder blockCommand = new ProcessBuilder();
         blockCommand.command("bash", "-c", block);
 	ProcessBuilder unblockCommand = new ProcessBuilder();
