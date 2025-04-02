@@ -35,7 +35,7 @@ public class BlockDaemon {
                 if (Duration.between(ignoreTime, currentTime).toHours() < 1) {
                     System.out.println("Unblock for the remainder of the time (until " +
                             ignoreTime.plusHours(1).format(DateTimeFormatter.ISO_LOCAL_TIME) + ")");
-                    System.out.println("Running: sudo project -u");
+                    System.out.println("Running: sudo dbt -u");
 		    Process unblockProcess = unblockCommand.start();
 		    unblockProcess.waitFor();
                     return; // We will unblock and exit the program
@@ -48,7 +48,7 @@ public class BlockDaemon {
 
             // Check if it's a "block" day and run the block command
             if (blockSetting.equals("all") || blockSetting.equals("0000-0000")) {
-                System.out.println("Running: sudo project -b");
+                System.out.println("Running: sudo dbt -b");
 		Process blockProcess = blockCommand.start();
 		blockProcess.waitFor();
             } else {
